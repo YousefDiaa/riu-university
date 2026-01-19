@@ -673,7 +673,7 @@
     </div>
     <script>
         // Google Apps Script API Configuration
-        const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbyzZXp6TsObz6cm8MSSqrSp3vN1KOzi42XlS67wFaMuiwadCJzWOxyaSSkXQDSTUxyU/exec';
+        const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbx0Z3eAIUKGRENhw3L_caiiIe3vZvJaAam2GGJGb0Jhc9_wAebS8JZjNspfoIuzywqcuw/exec';
 
         let newsData = [];
         let deleteTargetId = null;
@@ -864,7 +864,7 @@
 
         function openDeleteModal(id) {
             deleteTargetId = id;
-            const news = newsData.find(n => n.id === id);
+            const news = newsData.find(n => n.id == id);
             if (!news) return;
             document.getElementById('delete-title').textContent = news.title;
             document.getElementById('delete-modal').classList.remove('hidden');
@@ -881,7 +881,7 @@
             btn.disabled = true; btn.textContent = 'Deleting...';
             const success = await deleteNewsFromServer(deleteTargetId);
             if (success) {
-                newsData = newsData.filter(n => n.id !== deleteTargetId);
+                newsData = newsData.filter(n => n.id != deleteTargetId);
                 showToast('Deleted successfully!');
                 closeDeleteModal();
                 renderAll();
@@ -891,7 +891,7 @@
 
         // Edit news
         function openEditModal(id) {
-            const news = newsData.find(n => n.id === id);
+            const news = newsData.find(n => n.id == id);
             if (!news) return;
             document.getElementById('edit-id').value = news.id;
             document.getElementById('edit-title').value = news.title;
@@ -909,9 +909,9 @@
         document.getElementById('edit-news-form').addEventListener('submit', async e => {
             e.preventDefault();
             const formData = new FormData(e.target);
-            const id = parseInt(formData.get('id'));
-            const newsIndex = newsData.findIndex(n => n.id === id);
-            if (newsIndex === -1) return;
+            const id = formData.get('id');
+            const newsIndex = newsData.findIndex(n => n.id == id);
+            if (newsIndex === -1) { console.error('News not found'); return; }
 
             const btn = e.target.querySelector('button[type="submit"]');
             const originalText = btn.innerHTML;
@@ -937,7 +937,7 @@
 
                 const response = await fetch(GAS_API_URL, {
                     method: 'POST',
-                    body: JSON.stringify({ ...updatedNews, action: 'updateNews', id })
+                    body: JSON.stringify({ ...updatedNews, action: 'updateNews', id: newsData[newsIndex].id })
                 });
                 const result = await response.text();
                 if (result === 'updated' || result === 'success') {
@@ -1011,7 +1011,7 @@
             <td class="px-6 py-4"><span class="px-2.5 py-1 text-xs font-medium rounded-full ${n.type === 'featured' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700'}">${n.type}</span></td>
             <td class="px-6 py-4 text-right">
                 <div class="flex items-center justify-end gap-2">
-                    <button onclick="openEditModal(${n.id})" class="p-2 text-gray-500 hover:text-brand-700 hover:bg-brand-50 rounded-lg transition-colors">Edit</button>
+                    <button onclick="openEditModal('${n.id}')" class="p-2 text-gray-500 hover:text-brand-700 hover:bg-brand-50 rounded-lg transition-colors">Edit</button>
                     <button onclick="openDeleteModal('${n.id}')" class="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">Delete</button>
                 </div>
             </td>
