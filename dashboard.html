@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Rabbanisan University</title>
+    <meta name="description"
+        content="Admin dashboard for managing news and content at Rabbanisan International University.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                        navy: {
+                            800: '#1e3a5f',
+                            900: '#0f2942',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .sidebar-link {
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-link:hover {
+            background-color: rgba(15, 118, 110, 0.1);
+        }
+
+        .sidebar-link.active {
+            background-color: rgba(15, 118, 110, 0.15);
+            border-right: 3px solid #0f766e;
+        }
+
+        .table-row {
+            transition: background-color 0.15s ease;
+        }
+
+        .table-row:hover {
+            background-color: #f8fafc;
+        }
+
+        .modal-overlay {
+            backdrop-filter: blur(4px);
+        }
+
+        .card-shadow {
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .card-shadow-lg {
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <!-- Login Screen -->
+    <div id="login-screen" class="fixed inset-0 z-[100] bg-gray-900 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden">
+            <div class="p-8">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900">Admin Login</h2>
+                    <p class="text-gray-500 mt-2">Please enter your credentials to access the dashboard.</p>
+                </div>
+                <form id="login-form" class="space-y-6">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                        <input type="text" id="username" name="username" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
+                            placeholder="Enter username">
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <input type="password" id="password" name="password" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
+                            placeholder="Enter admin password">
+                    </div>
+                    <button type="submit"
+                        class="w-full px-6 py-3 text-sm font-medium text-white bg-brand-700 rounded-lg hover:bg-brand-800 transition-colors flex items-center justify-center gap-2">Sign
+                        In <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboard-container" class="flex min-h-screen hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar"
+            class="w-64 bg-white border-r border-gray-200 fixed h-full z-30 transform transition-transform duration-300 lg:translate-x-0 -translate-x-full">
+            <div class="p-6 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-brand-700 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 14l9-5-9-5-9 5 9 5z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-lg font-bold text-gray-900 block leading-tight">RIU Admin</span>
+                        <span class="text-xs text-gray-500">Dashboard</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="p-4">
+                <div class="mb-6">
+                    <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3">Main Menu</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <a href="#dashboard" onclick="showSection('dashboard')"
+                                class="sidebar-link active flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-gray-700 rounded-lg"
+                                data-section="dashboard">
+                                <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                </svg>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#add-news" onclick="showSection('add-news')"
+                                class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-gray-700 rounded-lg"
+                                data-section="add-news">
+                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4v16m8-8H4" />
+                                </svg>
+                                Add News
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#manage-news" onclick="showSection('manage-news')"
+                                class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-gray-700 rounded-lg"
+                                data-section="manage-news">
+                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                                </svg>
+                                Manage News
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mb-6">
+                    <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3">Settings</p>
+                    <ul class="space-y-1">
+                        <li>
+                            <a href="#"
+                                class="sidebar-link flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-gray-700 rounded-lg">
+                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                Settings
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100">
+                <a href="index.html"
+                    class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-gray-600 hover:text-brand-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                    </svg>
+                    Back to Website
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 lg:ml-64">
+            <!-- Top Header -->
+            <header class="bg-white border-b border-gray-200 sticky top-0 z-20">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <div class="flex items-center gap-4">
+                        <button id="sidebar-toggle" class="lg:hidden p-2 rounded-lg hover:bg-gray-100">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                        <h1 id="page-title" class="text-xl font-bold text-gray-900">Dashboard</h1>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button class="relative p-2 rounded-lg hover:bg-gray-100">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg>
+                            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 bg-brand-100 rounded-full flex items-center justify-center">
+                                <span class="text-sm font-semibold text-brand-700">AD</span>
+                            </div>
+                            <div class="hidden sm:block">
+                                <p class="text-sm font-medium text-gray-900">Admin User</p>
+                                <p class="text-xs text-gray-500">admin@riu.edu</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="section-dashboard" class="p-6">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-xl p-6 card-shadow border border-gray-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                                </svg>
+                            </div>
+                            <span
+                                class="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-full">+12%</span>
+                        </div>
+                        <h3 id="total-news-count" class="text-2xl font-bold text-gray-900 mb-1">0</h3>
+                        <p class="text-sm text-gray-500">Total News Articles</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 card-shadow border border-gray-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                                </svg>
+                            </div>
+                            <span
+                                class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded-full">Featured</span>
+                        </div>
+                        <h3 id="featured-count" class="text-2xl font-bold text-gray-900 mb-1">0</h3>
+                        <p class="text-sm text-gray-500">Featured Articles</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 card-shadow border border-gray-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 id="categories-count" class="text-2xl font-bold text-gray-900 mb-1">0</h3>
+                        <p class="text-sm text-gray-500">Categories</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 card-shadow border border-gray-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 id="this-month-count" class="text-2xl font-bold text-gray-900 mb-1">0</h3>
+                        <p class="text-sm text-gray-500">This Month</p>
+                    </div>
+                </div>
+
+                <!-- Recent News Table -->
+                <div class="bg-white rounded-xl card-shadow border border-gray-100">
+                    <div class="p-6 border-b border-gray-100">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-lg font-bold text-gray-900">Recent News</h2>
+                            <a href="#manage-news" onclick="showSection('manage-news')"
+                                class="text-sm text-brand-700 hover:underline font-medium">View All</a>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th
+                                        class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-6 py-3">
+                                        Title</th>
+                                    <th
+                                        class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-6 py-3">
+                                        Category</th>
+                                    <th
+                                        class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-6 py-3">
+                                        Date</th>
+                                    <th
+                                        class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-6 py-3">
+                                        Type</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-news-table" class="divide-y divide-gray-100">
+                                <!-- Rendered by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add News Section -->
+            <section id="section-add-news" class="p-6 hidden">
+                <div class="max-w-3xl mx-auto">
+                    <div class="bg-white rounded-xl card-shadow border border-gray-100">
+                        <div class="p-6 border-b border-gray-100">
+                            <h2 class="text-lg font-bold text-gray-900">Add New Article</h2>
+                            <p class="text-sm text-gray-500 mt-1">Fill in the details to create a new news article</p>
+                        </div>
+                        <form id="add-news-form" class="p-6 space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="md:col-span-2">
+                                    <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Title
+                                        *</label>
+                                    <input type="text" id="title" name="title" required
+                                        class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
+                                        placeholder="Enter article title">
+                                </div>
+
+                                <div>
+                                    <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Category
+                                        *</label>
+                                    <select id="category" name="category" required
+                                        class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all bg-white">
+                                        <option value="">Select category</option>
+                                        <option value="ACADEMIC">Academic</option>
+                                        <option value="PARTNERSHIP">Partnership</option>
+                                        <option value="RESEARCH">Research</option>
+                                        <option value="EVENT">Event</option>
+                                        <option value="ANNOUNCEMENT">Announcement</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="type" class="block text-sm font-medium text-gray-700 mb-2">Article Type
+                                        *</label>
+                                    <select id="type" name="type" required
+                                        class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all bg-white">
+                                        <option value="regular">Regular</option>
+                                        <option value="featured">Featured</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="date" class="block text-sm font-medium text-gray-700 mb-2">Publish Date
+                                        *</label>
+                                    <input type="date" id="date" name="date" required
+                                        class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all">
+                                </div>
+
+                                <div>
+                                    <label for="link" class="block text-sm font-medium text-gray-700 mb-2">Article
+                                        Link</label>
+                                    <input type="url" id="link" name="link"
+                                        class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
+                                        placeholder="https://example.com/article">
+                                </div>
+
+                                <div class="md:col-span-2">
+                                    <label for="image"
+                                        class="block text-sm font-medium text-gray-700 mb-2">Image</label>
+                                    <div class="border-2 border-dashed border-gray-200 rounded-lg p-6 text-center hover:border-brand-500 transition-colors cursor-pointer"
+                                        id="image-dropzone">
+                                        <input type="file" id="image" name="image" accept="image/*" class="hidden">
+                                        <div id="image-preview-container" class="hidden">
+                                            <img id="image-preview" class="max-h-48 mx-auto rounded-lg mb-3"
+                                                alt="Preview">
+                                            <button type="button" onclick="removeImage()"
+                                                class="text-sm text-red-600 hover:underline">Remove image</button>
+                                        </div>
+                                        <div id="image-placeholder">
+                                            <svg class="w-12 h-12 text-gray-400 mx-auto mb-3" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                            <p class="text-sm text-gray-600 mb-1">Click to upload or drag and drop</p>
+                                            <p class="text-xs text-gray-400">PNG, JPG, GIF up to 5MB</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="md:col-span-2">
+                                    <label for="excerpt" class="block text-sm font-medium text-gray-700 mb-2">Excerpt /
+                                        Content *</label>
+                                    <textarea id="excerpt" name="excerpt" rows="6" required
+                                        class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all resize-none"
+                                        placeholder="Enter the article content or excerpt..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-end gap-4 pt-4 border-t border-gray-100">
+                                <button type="button" onclick="resetForm()"
+                                    class="px-6 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                                    Reset
+                                </button>
+                                <button type="submit"
+                                    class="px-6 py-2.5 text-sm font-medium text-white bg-brand-700 rounded-lg hover:bg-brand-800 transition-colors flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    Publish Article
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Manage News Section -->
+            <section id="section-manage-news" class="p-6 hidden">
+                <div class="bg-white rounded-xl card-shadow border border-gray-100">
+                    <div class="p-6 border-b border-gray-100">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                            <div>
+                                <h2 class="text-lg font-bold text-gray-900">All News Articles</h2>
+                                <p class="text-sm text-gray-500 mt-1">Manage, edit, or delete news articles</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="relative">
+                                    <input type="text" id="search-news" placeholder="Search articles..."
+                                        class="pl-10 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent w-full sm:w-64">
+                                    <svg class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </div>
+                                <button onclick="showSection('add-news')"
+                                    class="px-4 py-2 text-sm font-medium text-white bg-brand-700 rounded-lg hover:bg-brand-800 transition-colors flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    <span class="hidden sm:inline">Add New</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th
+                                        class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-6 py-3">
+                                        Article</th>
+                                    <th
+                                        class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-6 py-3">
+                                        Category</th>
+                                    <th
+                                        class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-6 py-3">
+                                        Date</th>
+                                    <th
+                                        class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-6 py-3">
+                                        Type</th>
+                                    <th
+                                        class="text-right text-xs font-semibold text-gray-500 uppercase tracking-wider px-6 py-3">
+                                        Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="news-table-body" class="divide-y divide-gray-100">
+                                <!-- Rendered by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="no-news-message" class="hidden p-12 text-center">
+                        <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                        </svg>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">No articles found</h3>
+                        <p class="text-gray-500 mb-4">Get started by creating your first news article</p>
+                        <button onclick="showSection('add-news')"
+                            class="px-4 py-2 text-sm font-medium text-white bg-brand-700 rounded-lg hover:bg-brand-800 transition-colors">
+                            Add First Article
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0 bg-black/50" onclick="closeEditModal()"></div>
+        <div
+            class="absolute inset-4 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-full sm:max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-gray-100 flex items-center justify-between sticky top-0 bg-white z-10">
+                <h2 class="text-lg font-bold text-gray-900">Edit Article</h2>
+                <button onclick="closeEditModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <form id="edit-news-form" class="p-6 space-y-6">
+                <input type="hidden" id="edit-id" name="id">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="md:col-span-2">
+                        <label for="edit-title" class="block text-sm font-medium text-gray-700 mb-2">Title *</label>
+                        <input type="text" id="edit-title" name="title" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all">
+                    </div>
+
+                    <div>
+                        <label for="edit-category" class="block text-sm font-medium text-gray-700 mb-2">Category
+                            *</label>
+                        <select id="edit-category" name="category" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all bg-white">
+                            <option value="ACADEMIC">Academic</option>
+                            <option value="PARTNERSHIP">Partnership</option>
+                            <option value="RESEARCH">Research</option>
+                            <option value="EVENT">Event</option>
+                            <option value="ANNOUNCEMENT">Announcement</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="edit-type" class="block text-sm font-medium text-gray-700 mb-2">Article Type
+                            *</label>
+                        <select id="edit-type" name="type" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all bg-white">
+                            <option value="regular">Regular</option>
+                            <option value="featured">Featured</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="edit-date" class="block text-sm font-medium text-gray-700 mb-2">Publish Date
+                            *</label>
+                        <input type="date" id="edit-date" name="date" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all">
+                    </div>
+
+                    <div>
+                        <label for="edit-link" class="block text-sm font-medium text-gray-700 mb-2">Article Link</label>
+                        <input type="url" id="edit-link" name="link"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all">
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Current Image</label>
+                        <div class="flex items-center gap-4">
+                            <img id="edit-current-image"
+                                class="h-20 w-32 object-cover rounded-lg border border-gray-200" alt="Current">
+                            <div class="flex-1">
+                                <label for="edit-image" class="block text-sm text-gray-600 mb-1">Upload new image
+                                    (optional)</label>
+                                <input type="file" id="edit-image" name="image" accept="image/*"
+                                    class="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="edit-excerpt" class="block text-sm font-medium text-gray-700 mb-2">Excerpt / Content
+                            *</label>
+                        <textarea id="edit-excerpt" name="excerpt" rows="5" required
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all resize-none"></textarea>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end gap-4 pt-4 border-t border-gray-100">
+                    <button type="button" onclick="closeEditModal()"
+                        class="px-6 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="px-6 py-2.5 text-sm font-medium text-white bg-brand-700 rounded-lg hover:bg-brand-800 transition-colors">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0 bg-black/50" onclick="closeDeleteModal()"></div>
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white rounded-xl shadow-2xl p-6">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 mb-2">Delete Article</h3>
+                <p class="text-gray-600 mb-6">Are you sure you want to delete "<span id="delete-title"
+                        class="font-medium"></span>"? This action cannot be undone.</p>
+                <div class="flex items-center justify-center gap-4">
+                    <button onclick="closeDeleteModal()"
+                        class="px-6 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                        Cancel
+                    </button>
+                    <button onclick="confirmDelete()"
+                        class="px-6 py-2.5 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300">
+        <div class="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-3">
+            <svg id="toast-icon-success" class="w-5 h-5 text-green-400" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <svg id="toast-icon-error" class="w-5 h-5 text-red-400 hidden" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            <span id="toast-message">Operation successful</span>
+        </div>
+    </div>
+    <script>
+        // Google Apps Script API Configuration
+        const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbyzZXp6TsObz6cm8MSSqrSp3vN1KOzi42XlS67wFaMuiwadCJzWOxyaSSkXQDSTUxyU/exec';
+
+        let newsData = [];
+        let deleteTargetId = null;
+        let uploadedImageData = null;
+
+        // Login Logic
+        const loginScreen = document.getElementById('login-screen');
+        const dashboardContainer = document.getElementById('dashboard-container');
+        const loginForm = document.getElementById('login-form');
+
+        // Check if already logged in
+        if (sessionStorage.getItem('riu_admin_auth') === 'true') {
+            showDashboard();
+        }
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // SHA-256 hash of 'admin123'
+            const targetHash = '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9';
+
+            try {
+                const passwordHash = await hashString(password);
+                if (username === 'admin' && passwordHash === targetHash) {
+                    sessionStorage.setItem('riu_admin_auth', 'true');
+                    showDashboard();
+                } else {
+                    alert('Invalid credentials');
+                }
+            } catch (err) {
+                console.error("Secure context required for login:", err);
+                alert('Login requires a secure context (HTTPS or localhost).');
+            }
+        });
+
+        async function hashString(str) {
+            const msgBuffer = new TextEncoder().encode(str);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        function showDashboard() {
+            loginScreen.classList.add('hidden');
+            dashboardContainer.classList.remove('hidden');
+        }
+
+        // Helper: file to Base64
+        function toBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+        // async function getImageBase64(name) {
+        //     const res = await fetch(`${GAS_API_URL}?img=${encodeURIComponent(name)}`);
+        //     const text = await res.text();
+        //     return text.startsWith('data:') ? text : 'images/placeholder.jpg';
+        // }
+
+
+        // Load news from Google Apps Script
+        async function loadNewsData() {
+            try {
+                const response = await fetch(`${GAS_API_URL}?list=true`);
+                const text = await response.text();
+                const data = text ? JSON.parse(text) : [];
+                newsData = await Promise.all(data.map(async (news, i) => ({
+                    ...news,
+                    id: news.timestamp
+                })));
+                console.log("Loaded news with IDs:", newsData.map(n => n.id));
+
+                renderAll();
+            } catch (error) {
+                console.error('Error loading news:', error);
+                showToast('Error loading news, using fallback data', 'error');
+                newsData = [
+                    { id: 1, type: 'featured', category: 'ACADEMIC', date: 'Feb 15, 2026', title: 'Demo Article', excerpt: 'Demo content', image: 'images/news1.jpg', link: '#' }
+                ];
+                renderAll();
+            }
+        }
+
+        // Add news
+        document.getElementById('add-news-form').addEventListener('submit', async e => {
+            e.preventDefault();
+            const form = e.target;
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+
+            try {
+                btn.disabled = true;
+                btn.innerHTML = 'Publishing...';
+
+                const data = {
+                    action: 'addNews',
+                    title: document.getElementById('title').value,
+                    category: document.getElementById('category').value,
+                    type: document.getElementById('type').value,
+                    date: document.getElementById('date').value,
+                    link: document.getElementById('link').value || '',
+                    excerpt: document.getElementById('excerpt').value,
+                    files: []
+                };
+
+                if (uploadedImageData) {
+                    data.files.push({
+                        name: 'news-image.png',
+                        data: uploadedImageData
+                    });
+                }
+
+                const response = await fetch(GAS_API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(data)
+                });
+                const result = await response.text();
+                if (result === 'success') {
+                    showToast('Article published successfully!');
+                    resetForm();
+                    await loadNewsData();
+                } else throw new Error('Failed to publish');
+            } catch (err) {
+                console.error(err);
+                showToast('Error publishing article', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        });
+
+        function resetForm() {
+            document.getElementById('add-news-form').reset();
+            removeImage();
+        }
+
+        // Image upload
+        const imageInput = document.getElementById('image');
+        const dropzone = document.getElementById('image-dropzone');
+
+        dropzone.addEventListener('click', () => imageInput.click());
+        dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('border-brand-500', 'bg-brand-50'); });
+        dropzone.addEventListener('dragleave', () => dropzone.classList.remove('border-brand-500', 'bg-brand-50'));
+        dropzone.addEventListener('drop', e => {
+            e.preventDefault();
+            dropzone.classList.remove('border-brand-500', 'bg-brand-50');
+            if (e.dataTransfer.files.length) handleImageUpload(e.dataTransfer.files[0]);
+        });
+        imageInput.addEventListener('change', e => { if (e.target.files.length) handleImageUpload(e.target.files[0]); });
+
+        function handleImageUpload(file) {
+            if (!file.type.startsWith('image/')) return showToast('Only images allowed', 'error');
+            if (file.size > 5 * 1024 * 1024) return showToast('Image must be <5MB', 'error');
+
+            const reader = new FileReader();
+            reader.onload = e => {
+                uploadedImageData = e.target.result;
+                document.getElementById('image-preview').src = uploadedImageData;
+                document.getElementById('image-preview-container').classList.remove('hidden');
+                document.getElementById('image-placeholder').classList.add('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeImage() {
+            uploadedImageData = null;
+            imageInput.value = '';
+            document.getElementById('image-preview-container').classList.add('hidden');
+            document.getElementById('image-placeholder').classList.remove('hidden');
+        }
+
+        // Delete news
+        async function deleteNewsFromServer(id) {
+            try {
+                const response = await fetch(GAS_API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'deleteNews', id: id.toString() })
+                });
+                const text = await response.text();
+                return text === 'deleted' || text === 'success';
+            } catch (e) { console.error(e); showToast('Error deleting', 'error'); return false; }
+        }
+
+        function openDeleteModal(id) {
+            deleteTargetId = id;
+            const news = newsData.find(n => n.id === id);
+            if (!news) return;
+            document.getElementById('delete-title').textContent = news.title;
+            document.getElementById('delete-modal').classList.remove('hidden');
+        }
+
+        function closeDeleteModal() {
+            deleteTargetId = null;
+            document.getElementById('delete-modal').classList.add('hidden');
+        }
+
+        async function confirmDelete() {
+            if (deleteTargetId === null) return;
+            const btn = event.target;
+            btn.disabled = true; btn.textContent = 'Deleting...';
+            const success = await deleteNewsFromServer(deleteTargetId);
+            if (success) {
+                newsData = newsData.filter(n => n.id !== deleteTargetId);
+                showToast('Deleted successfully!');
+                closeDeleteModal();
+                renderAll();
+            }
+            btn.disabled = false; btn.textContent = 'Delete';
+        }
+
+        // Edit news
+        function openEditModal(id) {
+            const news = newsData.find(n => n.id === id);
+            if (!news) return;
+            document.getElementById('edit-id').value = news.id;
+            document.getElementById('edit-title').value = news.title;
+            document.getElementById('edit-category').value = news.category;
+            document.getElementById('edit-type').value = news.type;
+            document.getElementById('edit-date').value = parseDisplayDate(news.date);
+            document.getElementById('edit-link').value = news.link;
+            document.getElementById('edit-excerpt').value = news.excerpt;
+            document.getElementById('edit-current-image').src = news.image;
+            document.getElementById('edit-modal').classList.remove('hidden');
+        }
+
+        function closeEditModal() { document.getElementById('edit-modal').classList.add('hidden'); }
+
+        document.getElementById('edit-news-form').addEventListener('submit', async e => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const id = parseInt(formData.get('id'));
+            const newsIndex = newsData.findIndex(n => n.id === id);
+            if (newsIndex === -1) return;
+
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            try {
+                btn.disabled = true; btn.innerHTML = 'Updating...';
+
+                const updatedNews = {
+                    ...newsData[newsIndex],
+                    title: formData.get('title'),
+                    category: formData.get('category'),
+                    type: formData.get('type'),
+                    date: formData.get('date'),
+                    link: formData.get('link'),
+                    excerpt: formData.get('excerpt'),
+                    files: []
+                };
+
+                const editImageInput = document.getElementById('edit-image');
+                if (editImageInput.files.length) {
+                    const base64 = await toBase64(editImageInput.files[0]);
+                    updatedNews.files.push({ name: editImageInput.files[0].name, data: base64 });
+                }
+
+                const response = await fetch(GAS_API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ ...updatedNews, action: 'updateNews', id })
+                });
+                const result = await response.text();
+                if (result === 'updated' || result === 'success') {
+                    newsData[newsIndex] = updatedNews;
+                    showToast('Article updated successfully!');
+                    closeEditModal();
+                    renderAll();
+                } else throw new Error('Failed to update');
+            } catch (err) { console.error(err); showToast('Error updating article', 'error'); }
+            finally { btn.disabled = false; btn.innerHTML = originalText; }
+        });
+
+        // Utility: parse display date
+        function parseDisplayDate(displayDate) { return new Date(displayDate).toISOString().split('T')[0]; }
+
+        // Toast
+        function showToast(msg, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            const successIcon = document.getElementById('toast-icon-success');
+            const errorIcon = document.getElementById('toast-icon-error');
+            toastMessage.textContent = msg;
+            if (type === 'error') { successIcon.classList.add('hidden'); errorIcon.classList.remove('hidden'); }
+            else { successIcon.classList.remove('hidden'); errorIcon.classList.add('hidden'); }
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3000);
+        }
+
+        // Rendering functions (dashboard, tables)
+        function renderAll() { renderDashboardStats(); renderRecentNews(); renderNewsTable(); }
+        function renderDashboardStats() {
+            document.getElementById('total-news-count').textContent = newsData.length;
+            document.getElementById('featured-count').textContent = newsData.filter(n => n.type === 'featured').length;
+            const categories = [...new Set(newsData.map(n => n.category))];
+            document.getElementById('categories-count').textContent = categories.length;
+            const now = new Date(), month = now.getMonth(), year = now.getFullYear();
+            document.getElementById('this-month-count').textContent = newsData.filter(n => { const d = new Date(n.date); return d.getMonth() === month && d.getFullYear() === year; }).length;
+        }
+        function renderRecentNews() {
+            const tbody = document.getElementById('recent-news-table');
+            console.log(newsData.map(n => n.image));
+            tbody.innerHTML = newsData.slice(0, 5).map(n => `
+        <tr class="table-row">
+            <td class="px-6 py-4"><div class="flex items-center gap-3"><img src="${n.image}" class="w-10 h-10 rounded-lg object-cover" ><span class="text-sm font-medium text-gray-900 line-clamp-1 max-w-xs">${n.title}</span></div></td>
+            <td class="px-6 py-4"><span class="px-2.5 py-1 text-xs font-medium rounded-full ${getCategoryColor(n.category)}">${n.category}</span></td>
+            <td class="px-6 py-4 text-sm text-gray-600">${n.date}</td>
+            <td class="px-6 py-4"><span class="px-2.5 py-1 text-xs font-medium rounded-full ${n.type === 'featured' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700'}">${n.type}</span></td>
+        </tr>`).join('');
+        }
+        function renderNewsTable(filter = '') {
+            const tbody = document.getElementById('news-table-body');
+            const noMsg = document.getElementById('no-news-message');
+            let filtered = newsData;
+            console.log(newsData.map(n => n.image));
+            if (filter) filtered = newsData.filter(n => n.title.toLowerCase().includes(filter.toLowerCase()) || n.category.toLowerCase().includes(filter.toLowerCase()));
+            if (filtered.length === 0) { tbody.innerHTML = ''; noMsg.classList.remove('hidden'); return; }
+            noMsg.classList.add('hidden');
+            tbody.innerHTML = filtered.map(n => `
+        <tr class="table-row">
+            <td class="px-6 py-4">
+                <div class="flex items-center gap-3">
+                    <img src="${n.image}" class="w-12 h-12 rounded-lg object-cover" >
+                    <div class="min-w-0">
+                        <p class="text-sm font-medium text-gray-900 line-clamp-1">${n.title}</p>
+                        <p class="text-xs text-gray-500 line-clamp-1 max-w-xs">${n.excerpt}...</p>
+                    </div>
+                </div>
+            </td>
+            <td class="px-6 py-4"><span class="px-2.5 py-1 text-xs font-medium rounded-full ${getCategoryColor(n.category)}">${n.category}</span></td>
+            <td class="px-6 py-4 text-sm text-gray-600">${n.date}</td>
+            <td class="px-6 py-4"><span class="px-2.5 py-1 text-xs font-medium rounded-full ${n.type === 'featured' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700'}">${n.type}</span></td>
+            <td class="px-6 py-4 text-right">
+                <div class="flex items-center justify-end gap-2">
+                    <button onclick="openEditModal(${n.id})" class="p-2 text-gray-500 hover:text-brand-700 hover:bg-brand-50 rounded-lg transition-colors">Edit</button>
+                    <button onclick="openDeleteModal('${n.id}')" class="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">Delete</button>
+                </div>
+            </td>
+        </tr>`).join('');
+        }
+        function getCategoryColor(cat) { const colors = { 'ACADEMIC': 'bg-brand-100 text-brand-700', 'PARTNERSHIP': 'bg-purple-100 text-purple-700', 'RESEARCH': 'bg-blue-100 text-blue-700', 'EVENT': 'bg-amber-100 text-amber-700', 'ANNOUNCEMENT': 'bg-green-100 text-green-700' }; return colors[cat] || 'bg-gray-100 text-gray-700'; }
+
+        // Initialize page
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializePage);
+        else initializePage();
+
+        async function initializePage() {
+            await loadNewsData();
+            document.getElementById('date').valueAsDate = new Date();
+            document.getElementById('sidebar-toggle').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('-translate-x-full'));
+            document.getElementById('search-news').addEventListener('input', e => renderNewsTable(e.target.value));
+        }
+        // Show section
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('section[id^="section-"]').forEach(s => s.classList.add('hidden'));
+
+            // Show target section
+            document.getElementById(`section-${section}`).classList.remove('hidden');
+
+            // Update sidebar
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.section === section) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Update page title
+            const titles = {
+                'dashboard': 'Dashboard',
+                'add-news': 'Add News',
+                'manage-news': 'Manage News'
+            };
+            document.getElementById('page-title').textContent = titles[section] || 'Dashboard';
+
+            // Close mobile sidebar
+            document.getElementById('sidebar').classList.add('-translate-x-full');
+        }
+
+    </script>
+
+
+
+    <!-- <script>
+        // Google Apps Script API Configuration
+        const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbzrp37RL_H3B54yj7gueMFCYwzbxUgxOdoo5WMC0Hs05rDuQQTfTwYZ-lH-RV2IdJwauQ/exec';
+
+        // Initialize news data
+        let newsData = [];
+        let deleteTargetId = null;
+        let uploadedImageData = null;
+        let isLoading = false;
+
+        // Load news from Google Apps Script
+        async function loadNewsData() {
+            try {
+                isLoading = true;
+                const response = await fetch(`${GAS_API_URL}?action=getNews`, {
+                    method: 'GET',
+                    
+                });
+
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+                const data = await response.json();
+
+                if (Array.isArray(data) && data.length > 0) {
+                    newsData = data.map(news => ({
+                        id: news.id,
+                        type: news.type || 'regular',
+                        category: news.category || 'ACADEMIC',
+                        date: news.date,
+                        title: news.title,
+                        excerpt: news.excerpt,
+                        image: news.image,
+                        link: news.link || '#'
+                    }));
+                    console.log('News loaded successfully from Google Apps Script');
+                } else if (Array.isArray(data)) {
+                    console.log('No news articles found in database');
+                    newsData = [];
+                } else {
+                    throw new Error('Invalid response format from server');
+                }
+                isLoading = false;
+                renderAll();
+            } catch (error) {
+                console.error('Error loading news:', error);
+                console.log('Falling back to default news data');
+                newsData = [
+                    {
+                        id: 1,
+                        type: "featured",
+                        category: "ACADEMIC",
+                        date: "Feb 15, 2026",
+                        title: "Libyan Cultural Council Accredits Rabbanian International University",
+                        excerpt: `Accreditation of Rabbanian International University by the Libyan Cultural Council.`,
+                        image: "images/news1.jpg",
+                        link: "#"
+                    },
+                    {
+                        id: 2,
+                        type: "regular",
+                        category: "ACADEMIC",
+                        date: "Jul 28, 2024",
+                        title: "PhD with Distinction Awarded to Abdulmohsen Bafi",
+                        excerpt: `Researcher Abdulmohsen Tanko Shamoun Bafi was awarded a PhD with distinction.`,
+                        image: "images/news2.jpg",
+                        link: "#"
+                    }
+                ];
+                showToast('Using demo data - Google Apps Script not available', 'error');
+                isLoading = false;
+                renderAll();
+            }
+        }
+
+        // Add news to Google Apps Script
+        async function addNewsToServer(newsItem) {
+            try {
+                const response = await fetch(GAS_API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        title: newsItem.title,
+                        category: newsItem.category,
+                        type: newsItem.type,
+                        date: newsItem.date,
+                        excerpt: newsItem.excerpt,
+                        image: newsItem.image,
+                        link: newsItem.link
+                    })
+                });
+
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+                const data = await response.text();
+                if (data === 'success') {
+                    console.log('News added successfully');
+                    return true;
+                } else {
+                    throw new Error('Failed to save news to server');
+                }
+            } catch (error) {
+                console.error('Error adding news:', error);
+                showToast('Error saving news to server', 'error');
+                return false;
+            }
+        }
+
+        // Delete news from Google Apps Script
+        async function deleteNewsFromServer(id) {
+            try {
+                const response = await fetch(GAS_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'cors',
+                    body: JSON.stringify({
+                        action: 'deleteNews',
+                        id: id
+                    })
+                });
+
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+                const data = await response.text();
+                if (data === 'success') {
+                    console.log('News deleted successfully');
+                    return true;
+                } else {
+                    throw new Error('Failed to delete news from server');
+                }
+            } catch (error) {
+                console.error('Error deleting news:', error);
+                showToast('Error deleting news from server', 'error');
+                return false;
+            }
+        }
+
+        // Upload image to Google Apps Script
+        async function uploadImageToServer(base64Image) {
+            try {
+                const response = await fetch(GAS_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'cors',
+                    body: JSON.stringify({
+                        action: 'uploadImage',
+                        image: base64Image
+                    })
+                });
+
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+                const text = await response.text();
+                const data = JSON.parse(text);
+
+                if (data.path) {
+                    console.log('Image uploaded successfully:', data.path);
+                    return data.path;
+                } else {
+                    throw new Error('Failed to upload image to server');
+                }
+            } catch (error) {
+                console.error('Error uploading image:', error);
+                showToast('Error uploading image to server', 'error');
+                return null;
+            }
+        }
+
+        // Show section
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('section[id^="section-"]').forEach(s => s.classList.add('hidden'));
+
+            // Show target section
+            document.getElementById(`section-${section}`).classList.remove('hidden');
+
+            // Update sidebar
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.section === section) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Update page title
+            const titles = {
+                'dashboard': 'Dashboard',
+                'add-news': 'Add News',
+                'manage-news': 'Manage News'
+            };
+            document.getElementById('page-title').textContent = titles[section] || 'Dashboard';
+
+            // Close mobile sidebar
+            document.getElementById('sidebar').classList.add('-translate-x-full');
+        }
+
+        // Render dashboard stats
+        function renderDashboardStats() {
+            document.getElementById('total-news-count').textContent = newsData.length;
+            document.getElementById('featured-count').textContent = newsData.filter(n => n.type === 'featured').length;
+
+            const categories = [...new Set(newsData.map(n => n.category))];
+            document.getElementById('categories-count').textContent = categories.length;
+
+            const currentMonth = new Date().getMonth();
+            const currentYear = new Date().getFullYear();
+            const thisMonthNews = newsData.filter(n => {
+                const date = new Date(n.date);
+                return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
+            });
+            document.getElementById('this-month-count').textContent = thisMonthNews.length;
+        }
+
+        // Render recent news table
+        function renderRecentNews() {
+            const tbody = document.getElementById('recent-news-table');
+            const recentNews = newsData.slice(0, 5);
+
+            tbody.innerHTML = recentNews.map(news => `
+                <tr class="table-row">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <img src="${news.image}" alt="" class="w-10 h-10 rounded-lg object-cover">
+                            <span class="text-sm font-medium text-gray-900 line-clamp-1 max-w-xs">${news.title}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="px-2.5 py-1 text-xs font-medium rounded-full ${getCategoryColor(news.category)}">${news.category}</span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-600">${news.date}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2.5 py-1 text-xs font-medium rounded-full ${news.type === 'featured' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700'}">${news.type}</span>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Render news table
+        function renderNewsTable(filter = '') {
+            const tbody = document.getElementById('news-table-body');
+            const noMessage = document.getElementById('no-news-message');
+
+            let filteredNews = newsData;
+            if (filter) {
+                filteredNews = newsData.filter(n =>
+                    n.title.toLowerCase().includes(filter.toLowerCase()) ||
+                    n.category.toLowerCase().includes(filter.toLowerCase())
+                );
+            }
+
+            if (filteredNews.length === 0) {
+                tbody.innerHTML = '';
+                noMessage.classList.remove('hidden');
+                return;
+            }
+
+            noMessage.classList.add('hidden');
+            tbody.innerHTML = filteredNews.map(news => `
+                <tr class="table-row">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <img src="${news.image}" alt="" class="w-12 h-12 rounded-lg object-cover">
+                            <div class="min-w-0">
+                                <p class="text-sm font-medium text-gray-900 line-clamp-1">${news.title}</p>
+                                <p class="text-xs text-gray-500 line-clamp-1 max-w-xs">${news.excerpt.substring(0, 60)}...</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="px-2.5 py-1 text-xs font-medium rounded-full ${getCategoryColor(news.category)}">${news.category}</span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">${news.date}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2.5 py-1 text-xs font-medium rounded-full ${news.type === 'featured' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700'}">${news.type}</span>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <div class="flex items-center justify-end gap-2">
+                            <button onclick="openEditModal(${news.id})" class="p-2 text-gray-500 hover:text-brand-700 hover:bg-brand-50 rounded-lg transition-colors" title="Edit">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                </svg>
+                            </button>
+                            <button onclick="openDeleteModal(${news.id})" class="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Delete">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Get category color
+        function getCategoryColor(category) {
+            const colors = {
+                'ACADEMIC': 'bg-brand-100 text-brand-700',
+                'PARTNERSHIP': 'bg-purple-100 text-purple-700',
+                'RESEARCH': 'bg-blue-100 text-blue-700',
+                'EVENT': 'bg-amber-100 text-amber-700',
+                'ANNOUNCEMENT': 'bg-green-100 text-green-700'
+            };
+            return colors[category] || 'bg-gray-100 text-gray-700';
+        }
+
+        // Format date
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        // Parse date from display format
+        function parseDisplayDate(displayDate) {
+            const date = new Date(displayDate);
+            if (isNaN(date.getTime())) return '';
+            return date.toISOString().split('T')[0];
+        }
+
+        // Image upload handling
+        const imageInput = document.getElementById('image');
+        const dropzone = document.getElementById('image-dropzone');
+
+        dropzone.addEventListener('click', () => imageInput.click());
+        dropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropzone.classList.add('border-brand-500', 'bg-brand-50');
+        });
+        dropzone.addEventListener('dragleave', () => {
+            dropzone.classList.remove('border-brand-500', 'bg-brand-50');
+        });
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('border-brand-500', 'bg-brand-50');
+            if (e.dataTransfer.files.length) {
+                imageInput.files = e.dataTransfer.files;
+                handleImageUpload(e.dataTransfer.files[0]);
+            }
+        });
+
+        imageInput.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                handleImageUpload(e.target.files[0]);
+            }
+        });
+
+        function handleImageUpload(file) {
+            if (!file.type.startsWith('image/')) {
+                showToast('Please upload an image file', 'error');
+                return;
+            }
+            if (file.size > 5 * 1024 * 1024) {
+                showToast('Image size must be less than 5MB', 'error');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                uploadedImageData = e.target.result;
+                document.getElementById('image-preview').src = uploadedImageData;
+                document.getElementById('image-preview-container').classList.remove('hidden');
+                document.getElementById('image-placeholder').classList.add('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeImage() {
+            uploadedImageData = null;
+            document.getElementById('image').value = '';
+            document.getElementById('image-preview-container').classList.add('hidden');
+            document.getElementById('image-placeholder').classList.remove('hidden');
+        }
+
+        // Add news form
+        document.getElementById('add-news-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const formButton = e.target.querySelector('button[type="submit"]');
+            const originalText = formButton.innerHTML;
+
+            try {
+                formButton.disabled = true;
+                formButton.innerHTML = '<span>Publishing...</span>';
+
+                let imageUrl = 'images/placeholder.jpg';
+
+                // Upload image if provided
+                if (uploadedImageData) {
+                    imageUrl = await uploadImageToServer(uploadedImageData);
+                    if (!imageUrl) {
+                        formButton.disabled = false;
+                        formButton.innerHTML = originalText;
+                        return;
+                    }
+                }
+
+                // Create news object
+                const newsItem = {
+                    type: formData.get('type'),
+                    category: formData.get('category'),
+                    date: formatDate(formData.get('date')),
+                    title: formData.get('title'),
+                    excerpt: formData.get('excerpt'),
+                    image: imageUrl,
+                    link: formData.get('link') || '#'
+                };
+
+                // Add to server
+                const success = await addNewsToServer(newsItem);
+                if (success) {
+                    // Generate client-side ID from timestamp
+                    newsItem.id = Date.now();
+                    newsData.unshift(newsItem);
+                    showToast('Article published successfully!');
+                    resetForm();
+                    renderAll();
+                }
+
+                formButton.disabled = false;
+                formButton.innerHTML = originalText;
+            } catch (error) {
+                console.error('Error publishing article:', error);
+                showToast('Error publishing article', 'error');
+                formButton.disabled = false;
+                formButton.innerHTML = originalText;
+            }
+        });
+
+        function resetForm() {
+            document.getElementById('add-news-form').reset();
+            removeImage();
+        }
+
+        // Edit modal
+        function openEditModal(id) {
+            const news = newsData.find(n => n.id === id);
+            if (!news) return;
+
+            document.getElementById('edit-id').value = news.id;
+            document.getElementById('edit-title').value = news.title;
+            document.getElementById('edit-category').value = news.category;
+            document.getElementById('edit-type').value = news.type;
+            document.getElementById('edit-date').value = parseDisplayDate(news.date);
+            document.getElementById('edit-link').value = news.link;
+            document.getElementById('edit-excerpt').value = news.excerpt;
+            document.getElementById('edit-current-image').src = news.image;
+
+            document.getElementById('edit-modal').classList.remove('hidden');
+        }
+
+        function closeEditModal() {
+            document.getElementById('edit-modal').classList.add('hidden');
+            document.getElementById('edit-image').value = '';
+        }
+
+        document.getElementById('edit-news-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const id = parseInt(formData.get('id'));
+            const index = newsData.findIndex(n => n.id === id);
+
+            if (index === -1) return;
+
+            const submitButton = e.target.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+
+            try {
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<span>Updating...</span>';
+
+                let imageUrl = newsData[index].image;
+                const imageFile = document.getElementById('edit-image').files[0];
+
+                // Upload new image if provided
+                if (imageFile) {
+                    const reader = new FileReader();
+                    reader.onload = async (e) => {
+                        imageUrl = await uploadImageToServer(e.target.result);
+                        if (!imageUrl) {
+                            submitButton.disabled = false;
+                            submitButton.innerHTML = originalText;
+                            return;
+                        }
+                    };
+                    reader.readAsDataURL(imageFile);
+
+                    // Wait for upload to complete
+                    await new Promise(resolve => {
+                        const checkInterval = setInterval(() => {
+                            if (imageUrl !== newsData[index].image) {
+                                clearInterval(checkInterval);
+                                resolve();
+                            }
+                        }, 100);
+                        setTimeout(() => {
+                            clearInterval(checkInterval);
+                            resolve();
+                        }, 5000);
+                    });
+                }
+
+                const updatedNews = {
+                    ...newsData[index],
+                    title: formData.get('title'),
+                    category: formData.get('category'),
+                    type: formData.get('type'),
+                    date: formatDate(formData.get('date')),
+                    link: formData.get('link') || '#',
+                    excerpt: formData.get('excerpt'),
+                    image: imageUrl
+                };
+
+                // Update local data only (Google Apps Script doesn't support updateNews)
+                newsData[index] = updatedNews;
+                showToast('Article updated successfully!');
+                closeEditModal();
+                renderAll();
+
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalText;
+            } catch (error) {
+                console.error('Error updating news:', error);
+                showToast('Error updating article', 'error');
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalText;
+            }
+        });
+
+        // Delete modal
+        function openDeleteModal(id) {
+            const news = newsData.find(n => n.id === id);
+            if (!news) return;
+
+            deleteTargetId = id;
+            document.getElementById('delete-title').textContent = news.title;
+            document.getElementById('delete-modal').classList.remove('hidden');
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('delete-modal').classList.add('hidden');
+            deleteTargetId = null;
+        }
+
+        function confirmDelete() {
+            if (deleteTargetId === null) return;
+
+            const deleteButton = event.target;
+            deleteButton.disabled = true;
+            deleteButton.textContent = 'Deleting...';
+
+            deleteNewsFromServer(deleteTargetId).then(success => {
+                if (success) {
+                    newsData = newsData.filter(n => n.id !== deleteTargetId);
+                    showToast('Article deleted successfully!');
+                    closeDeleteModal();
+                    renderAll();
+                }
+                deleteButton.disabled = false;
+                deleteButton.textContent = 'Delete';
+            });
+        }
+
+        // Toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            const successIcon = document.getElementById('toast-icon-success');
+            const errorIcon = document.getElementById('toast-icon-error');
+
+            toastMessage.textContent = message;
+
+            if (type === 'error') {
+                successIcon.classList.add('hidden');
+                errorIcon.classList.remove('hidden');
+            } else {
+                successIcon.classList.remove('hidden');
+                errorIcon.classList.add('hidden');
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Render all components
+        function renderAll() {
+            renderDashboardStats();
+            renderRecentNews();
+            renderNewsTable();
+        }
+
+        // Initial page setup
+        async function initializePage() {
+            // Load news from Google Apps Script
+            await loadNewsData();
+
+            // Set default date to today
+            document.getElementById('date').valueAsDate = new Date();
+
+            // Setup sidebar toggle
+            document.getElementById('sidebar-toggle').addEventListener('click', () => {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.toggle('-translate-x-full');
+            });
+
+            // Setup search functionality
+            document.getElementById('search-news').addEventListener('input', (e) => {
+                renderNewsTable(e.target.value);
+            });
+        }
+
+        // Initialize page when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializePage);
+        } else {
+            initializePage();
+        }
+    </script> -->
+</body>
+
+</html>

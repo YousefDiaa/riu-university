@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colleges & Departments | Rabbanian University</title>
+  <meta name="description"
+    content="Discover our diverse academic programs rooted in excellence and tradition at Rabbanian University.">
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;family=Noto+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#135d6c",
+            "secondary": "#295A8F",
+            "background-light": "#f6f8f8",
+            "background-dark": "#121e20",
+          },
+          fontFamily: {
+            "display": ["Noto Serif", "serif"],
+            "sans": ["Noto Sans", "sans-serif"],
+          },
+          borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+          boxShadow: {
+            "float": "0 4px 12px rgba(0, 0, 0, 0.08)",
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Noto Sans', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Noto Serif', serif;
+    }
+
+    html[dir="rtl"] body {
+      direction: rtl;
+      text-align: right;
+    }
+
+    html[dir="rtl"] * {
+      text-align: inherit;
+    }
+
+    html[dir="ltr"] body {
+      direction: ltr;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <nav
+    class="sticky top-0 z-50 w-full border-b border-[#e8f0f2] bg-white/95 backdrop-blur-sm dark:bg-[#121e20]/95 dark:border-gray-700">
+    <div class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1440px] mx-auto">
+      <div class="flex items-center gap-4 md:gap-8">
+        <!-- Logo Area -->
+        <div class="flex items-center gap-3 text-primary dark:text-white">
+          <div class="size-10 flex items-center justify-center rounded-full bg-primary/10 text-primary">
+            <span class="material-symbols-outlined text-[28px]">school</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-lg font-bold leading-tight tracking-tight">RIU</span>
+            <span class="text-xs font-medium opacity-80">جامعة ربانيين العالمية</span>
+          </div>
+        </div>
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex items-center gap-8 pl-8">
+          <a class="text-sm font-medium hover:text-primary transition-colors" href="academic.html"><span
+              id="nav-programs">Programs</span></a>
+          <a class="text-sm font-medium hover:text-primary transition-colors" href="register.html"><span
+              id="nav-admissions">Admissions</span></a>
+          <a class="text-sm font-medium hover:text-primary transition-colors" href="aboutus.html"><span
+              id="nav-about">About</span></a>
+          <a class="text-sm font-medium hover:text-primary transition-colors" href="trust.html"><span
+              id="nav-research">Research</span></a>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <!-- Language Switch Button -->
+        <button
+          class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-[#0f181a] dark:text-white px-3 h-10 rounded-lg transition-colors text-sm font-medium"
+          id="langToggle" onclick="toggleLanguage()">
+          <span class="material-symbols-outlined text-[18px]">language</span>
+          <span id="langText">العربية</span>
+        </button>
+        <!-- Search -->
+        <div class="hidden md:flex items-center bg-[#e8f0f2] dark:bg-gray-800 rounded-lg px-3 h-10 w-64">
+          <span class="material-symbols-outlined text-[#538893] dark:text-gray-400 text-[20px]">search</span>
+          <input
+            class="bg-transparent border-none focus:ring-0 text-sm w-full ml-2 text-[#0f181a] dark:text-white placeholder:text-[#538893]"
+            id="search-input" placeholder="Search courses, faculty..." />
+        </div>
+        <!-- CTA -->
+        <button
+          class="bg-primary hover:bg-primary/90 text-white text-sm font-bold px-5 h-10 rounded-lg transition-colors flex items-center gap-2 shadow-sm"
+          id="btn-portal">
+          <span class="material-symbols-outlined text-[18px]">account_circle</span>
+          <span class="hidden sm:inline" id="btn-portal">Student Portal</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <!-- Main Content -->
+  <main class="flex-1">
+    <div class="max-w-6xl mx-auto px-4 py-8">
+
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-1 text-sm text-gray-500 mb-6">
+        <a href="index.html" class="hover:text-gray-800 transition-colors" id="breadcrumb-home">Home</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+        <span class="text-gray-800" id="breadcrumb-colleges">Colleges & Departments Guide</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="mb-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2" id="page-title">
+          Colleges & Departments
+        </h1>
+        <p class="text-gray-500" id="page-subtitle">
+          Asian-African Branch - Discover our diverse academic programs rooted in excellence and tradition.
+        </p>
+      </div>
+
+      <!-- Two Column Layout -->
+      <div class="flex flex-col lg:flex-row gap-8">
+
+        <!-- Left Sidebar -->
+        <div class="lg:w-72 flex-shrink-0">
+          <h3 class="text-xs font-semibold text-primary uppercase tracking-wide mb-4" id="select-college-label">Select
+            College</h3>
+
+          <div class="space-y-2" id="college-list">
+            <!-- College 1 -->
+            <button onclick="selectCollege(0)"
+              class="college-item active w-full flex items-center gap-3 p-3 rounded-lg hover:bg-primary-light transition-colors text-left">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-800 text-sm" id="sidebar-college-0">College of Islamic Studies</h4>
+                <p class="text-xs text-gray-500">5 Departments</p>
+              </div>
+            </button>
+
+            <!-- College 2 -->
+            <button onclick="selectCollege(1)"
+              class="college-item w-full flex items-center gap-3 p-3 rounded-lg hover:bg-primary-light transition-colors text-left">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-800 text-sm" id="sidebar-college-1">College of Arts & Humanities</h4>
+                <p class="text-xs text-gray-500">6 Departments</p>
+              </div>
+            </button>
+
+            <!-- College 3 -->
+            <button onclick="selectCollege(2)"
+              class="college-item w-full flex items-center gap-3 p-3 rounded-lg hover:bg-primary-light transition-colors text-left">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-800 text-sm" id="sidebar-college-2">College of Sharia & Law</h4>
+                <p class="text-xs text-gray-500">3 Departments</p>
+              </div>
+            </button>
+            <!-- College 4 -->
+            <button onclick="selectCollege(3)"
+              class="college-item w-full flex items-center gap-3 p-3 rounded-lg hover:bg-primary-light transition-colors text-left">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-800 text-sm" id="sidebar-college-3">College of Economics and
+                  Administrative Sciences</h4>
+                <p class="text-xs text-gray-500">8 Departments</p>
+              </div>
+            </button>
+            <!-- College 5 -->
+            <button onclick="selectCollege(4)"
+              class="college-item w-full flex items-center gap-3 p-3 rounded-lg hover:bg-primary-light transition-colors text-left">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-800 text-sm" id="sidebar-college-4">College of Educational Sciences
+                </h4>
+                <p class="text-xs text-gray-500">8 Departments</p>
+              </div>
+            </button>
+            <!-- College 6-->
+            <button onclick="selectCollege(5)"
+              class="college-item w-full flex items-center gap-3 p-3 rounded-lg hover:bg-primary-light transition-colors text-left">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-800 text-sm" id="sidebar-college-5">College of Media</h4>
+                <p class="text-xs text-gray-500">5 Departments</p>
+              </div>
+            </button>
+            <!-- College 7 -->
+            <button onclick="selectCollege(6)"
+              class="college-item w-full flex items-center gap-3 p-3 rounded-lg hover:bg-primary-light transition-colors text-left">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-800 text-sm" id="sidebar-college-6">College of Computer and Information
+                  Technology</h4>
+                <p class="text-xs text-gray-500">5 Departments</p>
+              </div>
+            </button>
+            <!-- College 8 -->
+            <button onclick="selectCollege(7)"
+              class="college-item w-full flex items-center gap-3 p-3 rounded-lg hover:bg-primary-light transition-colors text-left">
+              <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-800 text-sm" id="sidebar-college-7">Centers</h4>
+                <p class="text-xs text-gray-500">4 Centres</p>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Content -->
+        <div class="flex-1 bg-white rounded-xl border border-gray-200 p-6">
+
+          <!-- College Image -->
+          <div class="mb-6">
+            <div class="relative">
+              <img id="college-image" src="images/isalmic fucluty.jpeg" alt="College of Islamic Studies"
+                class="w-full h-64 md:h-80 object-contain mx-auto rounded-lg">
+              <span class="absolute top-3 left-3 bg-primary text-white text-xs px-2 py-1 rounded">PREVIEW</span>
+            </div>
+            <div class="flex justify-end mt-2">
+              <a href="#" class="flex items-center gap-1 text-sm text-primary hover:underline">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Brochure
+              </a>
+            </div>
+          </div>
+
+          <!-- College Info -->
+          <div class="mb-6">
+            <h2 id="college-name" class="text-2xl font-bold text-gray-800 mb-3">College of Islamic Studies</h2>
+            <p id="college-description" class="text-gray-600 text-sm leading-relaxed">
+              Providing a comprehensive understanding of Islamic sciences, fostering scholarly excellence rooted in the
+              Quran and Sunnah, tailored for contemporary challenges.
+            </p>
+          </div>
+
+          <!-- Departments -->
+          <div>
+            <div class="flex items-center gap-2 mb-4">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+              <h3 class="font-semibold text-gray-800" id="available-depts">Available Departments</h3>
+            </div>
+
+            <div id="departments-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Department 1 -->
+              <div class="p-4 border border-gray-200 rounded-lg hover:border-primary transition-colors">
+                <h4 class="font-medium text-gray-800 text-sm mb-1">General Islamic Studies</h4>
+                <p class="text-xs text-gray-500">Comprehensive foundation in Islamic knowledge.</p>
+              </div>
+
+              <!-- Department 2 -->
+              <div class="p-4 border border-gray-200 rounded-lg hover:border-primary transition-colors">
+                <h4 class="font-medium text-gray-800 text-sm mb-1">Qur’an and Its Sciences</h4>
+                <p class="text-xs text-gray-500">Study of Qur’an interpretation and sciences.</p>
+              </div>
+
+              <!-- Department 3 -->
+              <div class="p-4 border border-gray-200 rounded-lg hover:border-primary transition-colors">
+                <h4 class="font-medium text-gray-800 text-sm mb-1">Aqeedah and Contemporary Doctrines</h4>
+                <p class="text-xs text-gray-500">Understanding Islamic creed and modern ideologies.</p>
+              </div>
+
+              <!-- Department 4 -->
+              <div class="p-4 border border-gray-200 rounded-lg hover:border-primary transition-colors">
+                <h4 class="font-medium text-gray-800 text-sm mb-1">Hadith and Its Sciences</h4>
+                <p class="text-xs text-gray-500">Comprehensive study of prophetic traditions.</p>
+              </div>
+
+              <!-- Department 5 -->
+              <div class="p-4 border border-gray-200 rounded-lg hover:border-primary transition-colors">
+                <h4 class="font-medium text-gray-800 text-sm mb-1">Islamic Da‘wah and Culture</h4>
+                <p class="text-xs text-gray-500">Promoting Islamic outreach and cultural understanding.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#121e20] text-white pt-20 pb-10 border-t border-gray-800">
+    <div class="container mx-auto px-4 md:px-10 max-w-[1440px]">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <!-- Col 1: Brand -->
+        <div>
+          <div class="flex items-center gap-3 mb-6 text-white">
+            <div class="size-10 flex items-center justify-center rounded-full bg-white/10 text-white">
+              <span class="material-symbols-outlined text-[24px]">school</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-lg font-bold leading-tight">RIU</span>
+              <span class="text-[10px] font-medium opacity-70">جامعة ربانيين العالمية</span>
+            </div>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6" id="footer-brand-desc">
+            Bridging the gap between traditional Islamic knowledge and modern academic disciplines through a
+            rigorous, US-licensed curriculum.
+          </p>
+          <div class="flex gap-4">
+            <a class="text-gray-400 hover:text-white transition-colors"
+              href="https://www.facebook.com/profile.php?id=100095530594058"><span class="sr-only">Facebook</span>
+              <svg class="h-5 w-5" fill="currentColor" viewbox="0 0 24 24">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z">
+                </path>
+              </svg>
+            </a>
+            <a class="text-gray-400 hover:text-white transition-colors" href="https://t.me/AFBuniversity"><span
+                class="sr-only">Telegram</span>
+              <svg width="20px" height="20px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="#9ca3af"
+                class="bi bi-telegram">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z">
+                  </path>
+                </g>
+              </svg>
+
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 2: Academics -->
+        <div>
+          <h4 class="text-white font-bold mb-6 font-display" id="footer-academics">Academics</h4>
+          <ul class="space-y-4 text-sm text-gray-400">
+            <li><a class="hover:text-primary transition-colors" href="academic.html" id="footer-undergrad">Undergraduate
+                Programs</a></li>
+            <li><a class="hover:text-primary transition-colors" href="academic.html" id="footer-graduate">Graduate
+                Studies</a></li>
+            <li><a class="hover:text-primary transition-colors" href="academic.html" id="footer-phd">PhD Research</a>
+            </li>
+            <li><a class="hover:text-primary transition-colors" href="academic.html" id="footer-islamic">Islamic
+                Studies</a></li>
+            <li><a class="hover:text-primary transition-colors" href="academic.html" id="footer-digital">Digital
+                Humanities</a></li>
+          </ul>
+        </div>
+        <!-- Col 3: Quick Links -->
+        <div>
+          <h4 class="text-white font-bold mb-6 font-display" id="footer-quick">Quick Links</h4>
+          <ul class="space-y-4 text-sm text-gray-400">
+            <li><a class="hover:text-primary transition-colors" href="register.html" id="footer-admissions">Admissions
+                Portal</a></li>
+            <li><a class="hover:text-primary transition-colors" href="#" id="footer-calendar">Academic
+                Calendar</a></li>
+            <li><a class="hover:text-primary transition-colors" href="#" id="footer-library">Library &amp;
+                Resources</a></li>
+            <li><a class="hover:text-primary transition-colors" href="#" id="footer-alumni">Alumni
+                Network</a></li>
+            <li><a class="hover:text-primary transition-colors" href="trust.html" id="footer-verify">Verify
+                Degree</a></li>
+          </ul>
+        </div>
+        <!-- Col 4: Contact -->
+        <div>
+          <h4 class="text-white font-bold mb-6 font-display" id="footer-contact">Contact Us</h4>
+          <ul class="space-y-4 text-sm text-gray-400">
+            <li class="flex items-start gap-3">
+              <!-- <span class="material-symbols-outlined text-primary text-[20px]">location_on</span>
+<span>123 Academic Avenue, Knowledge District, USA</span>
+</li> -->
+            <li class="flex items-center gap-3">
+              <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <title>whatsapp [#128]</title>
+                  <desc>Created with Sketch.</desc>
+                  <defs> </defs>
+                  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Dribbble-Light-Preview" transform="translate(-300.000000, -7599.000000)" fill="#135d6c">
+                      <g id="icons" transform="translate(56.000000, 160.000000)">
+                        <path
+                          d="M259.821,7453.12124 C259.58,7453.80344 258.622,7454.36761 257.858,7454.53266 C257.335,7454.64369 256.653,7454.73172 254.355,7453.77943 C251.774,7452.71011 248.19,7448.90097 248.19,7446.36621 C248.19,7445.07582 248.934,7443.57337 250.235,7443.57337 C250.861,7443.57337 250.999,7443.58538 251.205,7444.07952 C251.446,7444.6617 252.034,7446.09613 252.104,7446.24317 C252.393,7446.84635 251.81,7447.19946 251.387,7447.72462 C251.252,7447.88266 251.099,7448.05372 251.27,7448.3478 C251.44,7448.63589 252.028,7449.59418 252.892,7450.36341 C254.008,7451.35771 254.913,7451.6748 255.237,7451.80984 C255.478,7451.90987 255.766,7451.88687 255.942,7451.69881 C256.165,7451.45774 256.442,7451.05762 256.724,7450.6635 C256.923,7450.38141 257.176,7450.3464 257.441,7450.44643 C257.62,7450.50845 259.895,7451.56477 259.991,7451.73382 C260.062,7451.85686 260.062,7452.43903 259.821,7453.12124 M254.002,7439 L253.997,7439 L253.997,7439 C248.484,7439 244,7443.48535 244,7449 C244,7451.18666 244.705,7453.21526 245.904,7454.86076 L244.658,7458.57687 L248.501,7457.3485 C250.082,7458.39482 251.969,7459 254.002,7459 C259.515,7459 264,7454.51465 264,7449 C264,7443.48535 259.515,7439 254.002,7439"
+                          id="whatsapp-[#128]"> </path>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+              <span>+18137789708 </span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <title>whatsapp [#128]</title>
+                  <desc>Created with Sketch.</desc>
+                  <defs> </defs>
+                  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Dribbble-Light-Preview" transform="translate(-300.000000, -7599.000000)" fill="#135d6c">
+                      <g id="icons" transform="translate(56.000000, 160.000000)">
+                        <path
+                          d="M259.821,7453.12124 C259.58,7453.80344 258.622,7454.36761 257.858,7454.53266 C257.335,7454.64369 256.653,7454.73172 254.355,7453.77943 C251.774,7452.71011 248.19,7448.90097 248.19,7446.36621 C248.19,7445.07582 248.934,7443.57337 250.235,7443.57337 C250.861,7443.57337 250.999,7443.58538 251.205,7444.07952 C251.446,7444.6617 252.034,7446.09613 252.104,7446.24317 C252.393,7446.84635 251.81,7447.19946 251.387,7447.72462 C251.252,7447.88266 251.099,7448.05372 251.27,7448.3478 C251.44,7448.63589 252.028,7449.59418 252.892,7450.36341 C254.008,7451.35771 254.913,7451.6748 255.237,7451.80984 C255.478,7451.90987 255.766,7451.88687 255.942,7451.69881 C256.165,7451.45774 256.442,7451.05762 256.724,7450.6635 C256.923,7450.38141 257.176,7450.3464 257.441,7450.44643 C257.62,7450.50845 259.895,7451.56477 259.991,7451.73382 C260.062,7451.85686 260.062,7452.43903 259.821,7453.12124 M254.002,7439 L253.997,7439 L253.997,7439 C248.484,7439 244,7443.48535 244,7449 C244,7451.18666 244.705,7453.21526 245.904,7454.86076 L244.658,7458.57687 L248.501,7457.3485 C250.082,7458.39482 251.969,7459 254.002,7459 C259.515,7459 264,7454.51465 264,7449 C264,7443.48535 259.515,7439 254.002,7439"
+                          id="whatsapp-[#128]"> </path>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+              <span>+967712236727 </span>
+            </li>
+            <!-- <li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">mail</span>
+<span>admissions@riu.edu.int</span>
+</li> -->
+          </ul>
+        </div>
+      </div>
+      <div
+        class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+        <p id="footer-copyright">© 2025 Rabbaninen International University. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a class="hover:text-white" href="#" id="footer-privacy">Privacy Policy</a>
+          <a class="hover:text-white" href="#" id="footer-terms">Terms of Use</a>
+          <a class="hover:text-white" href="trust.html" id="footer-accreditation">Accreditation</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        breadcrumb_home: "Home",
+        breadcrumb_colleges: "Colleges & Departments Guide",
+        page_title: "Colleges & Departments",
+        page_subtitle: "Asian-African Branch - Discover our diverse academic programs rooted in excellence and tradition.",
+        nav_programs: "Programs",
+        nav_admissions: "Admissions",
+        nav_about: "About",
+        nav_research: "Research",
+        search_placeholder: "Search courses, faculty...",
+        btn_portal: "Student Portal",
+        select_college: "Select College",
+        college_name: "College Name",
+        available_depts: "Available Departments",
+        footer_brand_desc: "Bridging the gap between traditional Islamic knowledge and modern academic disciplines through a rigorous, US-licensed curriculum.",
+        footer_academics: "Academics",
+        footer_undergrad: "Undergraduate Programs",
+        footer_graduate: "Graduate Studies",
+        footer_phd: "PhD Research",
+        footer_islamic: "Islamic Studies",
+        footer_digital: "Digital Humanities",
+        footer_quick: "Quick Links",
+        footer_admissions: "Admissions Portal",
+        footer_calendar: "Academic Calendar",
+        footer_library: "Library & Resources",
+        footer_alumni: "Alumni Network",
+        footer_verify: "Verify Degree",
+        footer_contact: "Contact Us",
+        footer_copyright: "© 2025 Rabbaninen International University. All rights reserved.",
+        footer_privacy: "Privacy Policy",
+        footer_terms: "Terms of Use",
+        footer_accreditation: "Accreditation",
+        college_islamic: "College of Islamic Studies",
+        college_islamic_desc: "Providing a comprehensive understanding of Islamic sciences.",
+        dept_general_islamic: "General Islamic Studies",
+        dept_general_islamic_desc: "Comprehensive foundation in Islamic knowledge.",
+        dept_quran: "Qur'an and Its Sciences",
+        dept_quran_desc: "Study of Qur'an interpretation and sciences.",
+        dept_aqeedah: "Aqeedah and Contemporary Doctrines",
+        dept_aqeedah_desc: "Understanding Islamic creed and modern ideologies.",
+        dept_hadith: "Hadith and Its Sciences",
+        dept_hadith_desc: "Comprehensive study of prophetic traditions.",
+        dept_dawah: "Islamic Da'wah and Culture",
+        dept_dawah_desc: "Promoting Islamic outreach and cultural understanding.",
+        college_arts: "College of Arts & Humanities",
+        college_arts_desc: "Exploring language, literature, and cultural studies.",
+        dept_arabic: "Arabic Language and Literature",
+        dept_arabic_desc: "Mastery of Arabic language and literary studies.",
+        dept_english: "English Language and Literature",
+        dept_english_desc: "In-depth study of English language and literature.",
+        dept_french: "French Language and Literature",
+        dept_french_desc: "Exploration of French language and literary traditions.",
+        dept_history: "History and Islamic Civilization",
+        dept_history_desc: "Understanding historical and Islamic heritage.",
+        dept_tourism: "Tourism Guidance",
+        dept_tourism_desc: "Training for professional tour and cultural guidance.",
+        dept_intl: "International Relations and Political Science",
+        dept_intl_desc: "Study of global politics and diplomacy.",
+        college_sharia: "College of Sharia & Law",
+        college_sharia_desc: "Islamic jurisprudence and comparative law.",
+        dept_sharia_law: "Sharia and Law",
+        dept_sharia_law_desc: "Foundations of Islamic law and legal systems.",
+        dept_judiciary: "Islamic Judiciary",
+        dept_judiciary_desc: "Training in judicial practices within Sharia framework.",
+        dept_fiqh: "Fiqh and Its Principles",
+        dept_fiqh_desc: "Advanced study of Islamic jurisprudence and methodology.",
+        college_economics: "College of Economics and Administrative Sciences",
+        college_economics_desc: "Shaping the future of business and management.",
+        dept_business: "Business Administration",
+        dept_business_desc: "Core principles of managing businesses effectively.",
+        dept_project: "Project Management",
+        dept_project_desc: "Techniques for planning and executing successful projects.",
+        dept_hrm: "Human Resource Management",
+        dept_hrm_desc: "Developing and managing organizational talent.",
+        dept_quality: "Quality Management",
+        dept_quality_desc: "Ensuring high standards and continuous improvement.",
+        dept_islamic_banking: "Economics and Islamic Banking",
+        dept_islamic_banking_desc: "Study of economics with focus on Islamic financial systems.",
+        dept_accounting: "Accounting",
+        dept_accounting_desc: "Principles and practices of financial accounting.",
+        dept_marketing: "Marketing",
+        dept_marketing_desc: "Strategies for promoting products and services.",
+        dept_hospital: "Hospital Management",
+        dept_hospital_desc: "Administration of healthcare facilities.",
+        college_education: "College of Educational Sciences",
+        college_education_desc: "Advancing the science of teaching and learning.",
+        dept_general_ed: "General Educational Sciences",
+        dept_general_ed_desc: "Fundamentals of teaching and learning.",
+        dept_ed_admin: "Educational Administration",
+        dept_ed_admin_desc: "Managing educational institutions efficiently.",
+        dept_special_ed: "Special Education",
+        dept_special_ed_desc: "Supporting learners with special needs.",
+        dept_family: "Family Guidance",
+        dept_family_desc: "Promoting family counseling and support services.",
+        dept_ed_psych: "Educational Psychology",
+        dept_ed_psych_desc: "Understanding learners' behavior and development.",
+        dept_mental_health: "Mental Health",
+        dept_mental_health_desc: "Promoting psychological wellbeing in educational settings.",
+        dept_curriculum: "Curriculum and Teaching Methods",
+        dept_curriculum_desc: "Designing effective curricula and instructional strategies.",
+        dept_env_ed: "Environmental Education",
+        dept_env_ed_desc: "Teaching sustainability and environmental awareness.",
+        college_media: "College of Media",
+        college_media_desc: "Shaping the future of media and communication.",
+        dept_media_pr: "Media and Public Relations",
+        dept_media_pr_desc: "Communicating effectively through media channels.",
+        dept_journalism: "Journalism",
+        dept_journalism_desc: "Reporting news and information accurately.",
+        dept_radio_tv: "Radio and Television",
+        dept_radio_tv_desc: "Producing and broadcasting audio-visual content.",
+        dept_digital: "Digital Media",
+        dept_digital_desc: "Exploring online media platforms and technologies.",
+        dept_pr: "Public Relations",
+        dept_pr_desc: "Managing organizational communication and image.",
+        college_computer: "College of Computer and Information Technology",
+        college_computer_desc: "Shaping the future of technology and innovation.",
+        dept_cs: "Computer Science",
+        dept_cs_desc: "Fundamentals and applications of computing.",
+        dept_it: "Information Technology",
+        dept_it_desc: "Managing and implementing IT systems.",
+        dept_mis: "Management Information Systems",
+        dept_mis_desc: "Using IT to support business processes.",
+        dept_cyber: "Cybersecurity",
+        dept_cyber_desc: "Protecting digital systems and data.",
+        dept_ai: "Artificial Intelligence",
+        dept_ai_desc: "Designing intelligent systems and algorithms.",
+        college_centers: "Centers",
+        college_centers_desc: "Supporting academic excellence and community development.",
+        dept_measurement: "Measurement and Evaluation Center",
+        dept_measurement_desc: "Ensuring excellence through precise assessment.",
+        dept_training: "Training and Community Service Center",
+        dept_training_desc: "Empowering skills and serving society.",
+        dept_research: "Studies and Research Center",
+        dept_research_desc: "Driving knowledge through research and inquiry.",
+        dept_dawah_center: "Islamic Da'wah Center",
+        dept_dawah_center_desc: "Promoting Islamic values and outreach."
+      },
+      ar: {
+        breadcrumb_home: "الرئيسية",
+        breadcrumb_colleges: "دليل الكليات والأقسام",
+        page_title: "الكليات والأقسام",
+        page_subtitle: "فرع آسيا-أفريقيا - اكتشف برامجنا الأكاديمية المتنوعة المتجذرة في التميز والتقاليد.",
+        nav_programs: "البرامج",
+        nav_admissions: "القبول",
+        nav_about: "عن الجامعة",
+        nav_research: "البحث العلمي",
+        search_placeholder: "ابحث عن الدورات والأساتذة...",
+        btn_portal: "بوابة الطلاب",
+        select_college: "اختر الكلية",
+        college_name: "اسم الكلية",
+        available_depts: "الأقسام المتاحة",
+        footer_brand_desc: "ربط الفجوة بين المعرفة الإسلامية التقليدية والتخصصات الأكاديمية الحديثة من خلال منهج صارم مرخص من الولايات المتحدة.",
+        footer_academics: "الأكاديميات",
+        footer_undergrad: "برامج البكالوريوس",
+        footer_graduate: "الدراسات العليا",
+        footer_phd: "أبحاث الدكتوراه",
+        footer_islamic: "الدراسات الإسلامية",
+        footer_digital: "الإنسانيات الرقمية",
+        footer_quick: "روابط سريعة",
+        footer_admissions: "بوابة القبول",
+        footer_calendar: "التقويم الأكاديمي",
+        footer_library: "المكتبة والمصادر",
+        footer_alumni: "شبكة الخريجين",
+        footer_verify: "تحقق من الشهادة",
+        footer_contact: "اتصل بنا",
+        footer_copyright: "© 2025 جامعة ربانيين الدولية. جميع الحقوق محفوظة.",
+        footer_privacy: "سياسة الخصوصية",
+        footer_terms: "شروط الاستخدام",
+        footer_accreditation: "الاعتماد الأكاديمي",
+        college_islamic: "كلية الدراسات الإسلامية",
+        college_islamic_desc: "توفير فهم شامل للعلوم الإسلامية.",
+        dept_general_islamic: "الدراسات الإسلامية العامة",
+        dept_general_islamic_desc: "الأساس الشامل في المعرفة الإسلامية.",
+        dept_quran: "علوم القرآن وتفسيره",
+        dept_quran_desc: "دراسة تفسير القرآن والعلوم.",
+        dept_aqeedah: "العقيدة والمذاهب المعاصرة",
+        dept_aqeedah_desc: "فهم العقيدة الإسلامية والأيديولوجيات الحديثة.",
+        dept_hadith: "علم الحديث وعلومه",
+        dept_hadith_desc: "دراسة شاملة للسنة النبوية.",
+        dept_dawah: "الدعوة الإسلامية والثقافة",
+        dept_dawah_desc: "تعزيز الدعوة الإسلامية والفهم الثقافي.",
+        college_arts: "كلية الآداب والعلوم الإنسانية",
+        college_arts_desc: "استكشاف اللغة والأدب والدراسات الثقافية.",
+        dept_arabic: "اللغة العربية والأدب",
+        dept_arabic_desc: "إتقان اللغة العربية والدراسات الأدبية.",
+        dept_english: "اللغة الإنجليزية والأدب",
+        dept_english_desc: "دراسة متعمقة للغة الإنجليزية والأدب.",
+        dept_french: "اللغة الفرنسية والأدب",
+        dept_french_desc: "استكشاف اللغة الفرنسية والتقاليد الأدبية.",
+        dept_history: "التاريخ والحضارة الإسلامية",
+        dept_history_desc: "فهم التراث التاريخي والإسلامي.",
+        dept_tourism: "الإرشادة السياحية",
+        dept_tourism_desc: "التدريب على الإرشادة السياحية والثقافية.",
+        dept_intl: "العلاقات الدولية والعلوم السياسية",
+        dept_intl_desc: "دراسة السياسة العالمية والدبلوماسية.",
+        college_sharia: "كلية الشريعة والقانون",
+        college_sharia_desc: "الفقه الإسلامي والقانون المقارن.",
+        dept_sharia_law: "الشريعة والقانون",
+        dept_sharia_law_desc: "أسس القانون الإسلامي والأنظمة القانونية.",
+        dept_judiciary: "القضاء الإسلامي",
+        dept_judiciary_desc: "التدريب على الممارسات القضائية في إطار الشريعة.",
+        dept_fiqh: "الفقه وأصوله",
+        dept_fiqh_desc: "دراسة متقدمة للفقه الإسلامي والمنهجية.",
+        college_economics: "كلية الاقتصاد والعلوم الإدارية",
+        college_economics_desc: "تشكيل مستقبل الأعمال والإدارة.",
+        dept_business: "إدارة الأعمال",
+        dept_business_desc: "المبادئ الأساسية لإدارة الأعمال بفعالية.",
+        dept_project: "إدارة المشاريع",
+        dept_project_desc: "تقنيات التخطيط والتنفيذ الناجح للمشاريع.",
+        dept_hrm: "إدارة الموارد البشرية",
+        dept_hrm_desc: "تطوير وإدارة مواهب المنظمة.",
+        dept_quality: "إدارة الجودة",
+        dept_quality_desc: "ضمان المعايير العالية والتحسين المستمر.",
+        dept_islamic_banking: "الاقتصاد والبنوك الإسلامية",
+        dept_islamic_banking_desc: "دراسة الاقتصاد مع التركيز على الأنظمة المالية الإسلامية.",
+        dept_accounting: "المحاسبة",
+        dept_accounting_desc: "مبادئ وممارسات المحاسبة المالية.",
+        dept_marketing: "التسويق",
+        dept_marketing_desc: "استراتيجيات تعزيز المنتجات والخدمات.",
+        dept_hospital: "إدارة المرافق الطبية",
+        dept_hospital_desc: "إدارة المنشآت الصحية.",
+        college_education: "كلية العلوم التربوية",
+        college_education_desc: "تقدم العلوم التعليمية والتعلم.",
+        dept_general_ed: "العلوم التربوية العامة",
+        dept_general_ed_desc: "أساسيات التعليم والتعلم.",
+        dept_ed_admin: "الإدارة التربوية",
+        dept_ed_admin_desc: "إدارة المؤسسات التعليمية بفعالية.",
+        dept_special_ed: "التربية الخاصة",
+        dept_special_ed_desc: "دعم الطلاب ذوي الاحتياجات الخاصة.",
+        dept_family: "الإرشادة الأسرية",
+        dept_family_desc: "تعزيز الإرشادة الأسرية وخدمات الدعم.",
+        dept_ed_psych: "علم النفس التربوي",
+        dept_ed_psych_desc: "فهم سلوك الطلاب وتطورهم.",
+        dept_mental_health: "الصحة النفسية",
+        dept_mental_health_desc: "تعزيز الرفاهية النفسية في الإعدادات التعليمية.",
+        dept_curriculum: "المناهج وطرق التدريس",
+        dept_curriculum_desc: "تصميم المناهج الفعالة والاستراتيجيات التعليمية.",
+        dept_env_ed: "التربية البيئية",
+        dept_env_ed_desc: "تعليم الاستدامة والوعي البيئي.",
+        college_media: "كلية الإعلام",
+        college_media_desc: "تشكيل مستقبل الإعلام والاتصالات.",
+        dept_media_pr: "الإعلام والعلاقات العامة",
+        dept_media_pr_desc: "التواصل الفعال عبر قنوات الإعلام.",
+        dept_journalism: "الصحافة",
+        dept_journalism_desc: "تغطية الأخبار والمعلومات بدقة.",
+        dept_radio_tv: "الراديو والتلفزيون",
+        dept_radio_tv_desc: "إنتاج وبث المحتوى السمعي والبصري.",
+        dept_digital: "الإعلام الرقمي",
+        dept_digital_desc: "استكشاف منصات الإعلام الرقمية والتكنولوجيات.",
+        dept_pr: "العلاقات العامة",
+        dept_pr_desc: "إدارة اتصالات المنظمة وصورتها.",
+        college_computer: "كلية الحاسوب وتكنولوجيا المعلومات",
+        college_computer_desc: "تشكيل مستقبل التكنولوجيا والابتكار.",
+        dept_cs: "علوم الحاسوب",
+        dept_cs_desc: "أساسيات وتطبيقات الحوسبة.",
+        dept_it: "تكنولوجيا المعلومات",
+        dept_it_desc: "إدارة وتنفيذ أنظمة تكنولوجيا المعلومات.",
+        dept_mis: "نظم المعلومات الإدارية",
+        dept_mis_desc: "استخدام تكنولوجيا المعلومات لدعم العمليات التجارية.",
+        dept_cyber: "الأمن السيبراني",
+        dept_cyber_desc: "حماية الأنظمة الرقمية والبيانات.",
+        dept_ai: "الذكاء الاصطناعي",
+        dept_ai_desc: "تصميم الأنظمة والخوارزميات الذكية.",
+        college_centers: "المراكز",
+        college_centers_desc: "دعم التميز الأكاديمي وتطوير المجتمع.",
+        dept_measurement: "مركز القياس والتقويم",
+        dept_measurement_desc: "ضمان التميز من خلال التقييم الدقيق.",
+        dept_training: "مركز التدريب وخدمة المجتمع",
+        dept_training_desc: "تمكين المهارات وخدمة المجتمع.",
+        dept_research: "مركز الدراسات والبحوث",
+        dept_research_desc: "دفع المعرفة من خلال البحث والاستقصاء.",
+        dept_dawah_center: "مركز الدعوة الإسلامية",
+        dept_dawah_center_desc: "تعزيز القيم الإسلامية والدعوة."
+      }
+    };
+
+    function initLanguage() {
+      const saved = localStorage.getItem('language') || 'en';
+      setLanguage(saved);
+    }
+
+    function setLanguage(lang) {
+      const html = document.getElementById('htmlRoot');
+      const dir = lang === 'ar' ? 'rtl' : 'ltr';
+      html.lang = lang;
+      html.dir = dir;
+      localStorage.setItem('language', lang);
+      updateLanguageContent(lang);
+      updatePageText(lang);
+    }
+
+    function toggleLanguage() {
+      const html = document.getElementById('htmlRoot');
+      const currentLang = html.lang;
+      const newLang = currentLang === 'en' ? 'ar' : 'en';
+      setLanguage(newLang);
+    }
+
+    function updateLanguageContent(lang) {
+      const langText = document.getElementById('langText');
+      if (lang === 'ar') {
+        document.documentElement.classList.add('is-arabic');
+        langText.textContent = 'English';
+      } else {
+        document.documentElement.classList.remove('is-arabic');
+        langText.textContent = 'العربية';
+      }
+    }
+
+    function updatePageText(lang) {
+      const t = translations[lang];
+      const elements = {
+        'breadcrumb-home': t.breadcrumb_home,
+        'breadcrumb-colleges': t.breadcrumb_colleges,
+        'page-title': t.page_title,
+        'page-subtitle': t.page_subtitle,
+        'nav-programs': t.nav_programs,
+        'nav-admissions': t.nav_admissions,
+        'nav-about': t.nav_about,
+        'nav-research': t.nav_research,
+        'search-input': t.search_placeholder,
+        'btn-portal': t.btn_portal,
+        'select-college-label': t.select_college,
+        'available-depts': t.available_depts,
+        'footer-brand-desc': t.footer_brand_desc,
+        'footer-academics': t.footer_academics,
+        'footer-undergrad': t.footer_undergrad,
+        'footer-graduate': t.footer_graduate,
+        'footer-phd': t.footer_phd,
+        'footer-islamic': t.footer_islamic,
+        'footer-digital': t.footer_digital,
+        'footer-quick': t.footer_quick,
+        'footer-admissions': t.footer_admissions,
+        'footer-calendar': t.footer_calendar,
+        'footer-library': t.footer_library,
+        'footer-alumni': t.footer_alumni,
+        'footer-verify': t.footer_verify,
+        'footer-contact': t.footer_contact,
+        'footer-copyright': t.footer_copyright,
+        'footer-privacy': t.footer_privacy,
+        'footer-terms': t.footer_terms,
+        'footer-accreditation': t.footer_accreditation
+      };
+
+      for (const [id, text] of Object.entries(elements)) {
+        const element = document.getElementById(id);
+        if (element) {
+          element.textContent = text;
+        }
+      }
+
+      // Update sidebar college names
+      colleges.forEach((college, index) => {
+        const el = document.getElementById(`sidebar-college-${index}`);
+        if (el) {
+          el.textContent = college.name[lang] || college.name.en;
+        }
+      });
+
+      // Refresh current college departments with new language
+      selectCollege(currentCollegeIndex);
+    }
+
+    let currentCollegeIndex = 0;
+
+    document.addEventListener('DOMContentLoaded', initLanguage);
+
+    const colleges = [
+      {
+        name: { en: "College of Islamic Studies", ar: "كلية الدراسات الإسلامية" },
+        description: { en: "Providing a comprehensive understanding of Islamic sciences.", ar: "توفير فهم شامل للعلوم الإسلامية." },
+        image: "images/islamic_faculty.jpeg",
+        departments: [
+          { title: { en: "General Islamic Studies", ar: "الدراسات الإسلامية العامة" }, desc: { en: "Comprehensive foundation in Islamic knowledge.", ar: "الأساس الشامل في المعرفة الإسلامية." } },
+          { title: { en: "Qur'an and Its Sciences", ar: "علوم القرآن وتفسيره" }, desc: { en: "Study of Qur'an interpretation and sciences.", ar: "دراسة تفسير القرآن والعلوم." } },
+          { title: { en: "Aqeedah and Contemporary Doctrines", ar: "العقيدة والمذاهب المعاصرة" }, desc: { en: "Understanding Islamic creed and modern ideologies.", ar: "فهم العقيدة الإسلامية والأيديولوجيات الحديثة." } },
+          { title: { en: "Hadith and Its Sciences", ar: "علم الحديث وعلومه" }, desc: { en: "Comprehensive study of prophetic traditions.", ar: "دراسة شاملة للسنة النبوية." } },
+          { title: { en: "Islamic Da'wah and Culture", ar: "الدعوة الإسلامية والثقافة" }, desc: { en: "Promoting Islamic outreach and cultural understanding.", ar: "تعزيز الدعوة الإسلامية والفهم الثقافي." } }
+        ]
+      },
+      {
+        name: { en: "College of Arts & Humanities", ar: "كلية الآداب والعلوم الإنسانية" },
+        description: { en: "Exploring language, literature, and cultural studies.", ar: "استكشاف اللغة والأدب والدراسات الثقافية." },
+        image: "images/arts_humanities.jpeg",
+        departments: [
+          { title: { en: "Arabic Language and Literature", ar: "اللغة العربية والأدب" }, desc: { en: "Mastery of Arabic language and literary studies.", ar: "إتقان اللغة العربية والدراسات الأدبية." } },
+          { title: { en: "English Language and Literature", ar: "اللغة الإنجليزية والأدب" }, desc: { en: "In-depth study of English language and literature.", ar: "دراسة متعمقة للغة الإنجليزية والأدب." } },
+          { title: { en: "French Language and Literature", ar: "اللغة الفرنسية والأدب" }, desc: { en: "Exploration of French language and literary traditions.", ar: "استكشاف اللغة الفرنسية والتقاليد الأدبية." } },
+          { title: { en: "History and Islamic Civilization", ar: "التاريخ والحضارة الإسلامية" }, desc: { en: "Understanding historical and Islamic heritage.", ar: "فهم التراث التاريخي والإسلامي." } },
+          { title: { en: "Tourism Guidance", ar: "الإرشادة السياحية" }, desc: { en: "Training for professional tour and cultural guidance.", ar: "التدريب على الإرشادة السياحية والثقافية." } },
+          { title: { en: "International Relations and Political Science", ar: "العلاقات الدولية والعلوم السياسية" }, desc: { en: "Study of global politics and diplomacy.", ar: "دراسة السياسة العالمية والدبلوماسية." } }
+        ]
+      },
+      {
+        name: { en: "College of Sharia & Law", ar: "كلية الشريعة والقانون" },
+        description: { en: "Islamic jurisprudence and comparative law.", ar: "الفقه الإسلامي والقانون المقارن." },
+        image: "images/sharia_law.jpeg",
+        departments: [
+          { title: { en: "Sharia and Law", ar: "الشريعة والقانون" }, desc: { en: "Foundations of Islamic law and legal systems.", ar: "أسس القانون الإسلامي والأنظمة القانونية." } },
+          { title: { en: "Islamic Judiciary", ar: "القضاء الإسلامي" }, desc: { en: "Training in judicial practices within Sharia framework.", ar: "التدريب على الممارسات القضائية في إطار الشريعة." } },
+          { title: { en: "Fiqh and Its Principles", ar: "الفقه وأصوله" }, desc: { en: "Advanced study of Islamic jurisprudence and methodology.", ar: "دراسة متقدمة للفقه الإسلامي والمنهجية." } }
+        ]
+      },
+      {
+        name: { en: "College of Economics and Administrative Sciences", ar: "كلية الاقتصاد والعلوم الإدارية" },
+        description: { en: "Shaping the future of business and management.", ar: "تشكيل مستقبل الأعمال والإدارة." },
+        image: "images/economics.jpeg",
+        departments: [
+          { title: { en: "Business Administration", ar: "إدارة الأعمال" }, desc: { en: "Core principles of managing businesses effectively.", ar: "المبادئ الأساسية لإدارة الأعمال بفعالية." } },
+          { title: { en: "Project Management", ar: "إدارة المشاريع" }, desc: { en: "Techniques for planning and executing successful projects.", ar: "تقنيات التخطيط والتنفيذ الناجح للمشاريع." } },
+          { title: { en: "Human Resource Management", ar: "إدارة الموارد البشرية" }, desc: { en: "Developing and managing organizational talent.", ar: "تطوير وإدارة مواهب المنظمة." } },
+          { title: { en: "Quality Management", ar: "إدارة الجودة" }, desc: { en: "Ensuring high standards and continuous improvement.", ar: "ضمان المعايير العالية والتحسين المستمر." } },
+          { title: { en: "Economics and Islamic Banking", ar: "الاقتصاد والبنوك الإسلامية" }, desc: { en: "Study of economics with focus on Islamic financial systems.", ar: "دراسة الاقتصاد مع التركيز على الأنظمة المالية الإسلامية." } },
+          { title: { en: "Accounting", ar: "المحاسبة" }, desc: { en: "Principles and practices of financial accounting.", ar: "مبادئ وممارسات المحاسبة المالية." } },
+          { title: { en: "Marketing", ar: "التسويق" }, desc: { en: "Strategies for promoting products and services.", ar: "استراتيجيات تعزيز المنتجات والخدمات." } },
+          { title: { en: "Hospital Management", ar: "إدارة المرافق الطبية" }, desc: { en: "Administration of healthcare facilities.", ar: "إدارة المنشآت الصحية." } }
+        ]
+      },
+      {
+        name: { en: "College of Educational Sciences", ar: "كلية العلوم التربوية" },
+        description: { en: "Advancing the science of teaching and learning.", ar: "تقدم العلوم التعليمية والتعلم." },
+        image: "images/educational_sciences.jpeg",
+        departments: [
+          { title: { en: "General Educational Sciences", ar: "العلوم التربوية العامة" }, desc: { en: "Fundamentals of teaching and learning.", ar: "أساسيات التدريس والتعلم." } },
+          { title: { en: "Educational Administration", ar: "الإدارة التربوية" }, desc: { en: "Managing educational institutions efficiently.", ar: "إدارة المؤسسات التعليمية بكفاءة." } },
+          { title: { en: "Special Education", ar: "التربية الخاصة" }, desc: { en: "Supporting learners with special needs.", ar: "دعم المتعلمين ذوي الاحتياجات الخاصة." } },
+          { title: { en: "Family Guidance", ar: "التوجيه الأسري" }, desc: { en: "Promoting family counseling and support services.", ar: "تعزيز الاستشارة الأسرية وخدمات الدعم." } },
+          { title: { en: "Educational Psychology", ar: "علم النفس التربوي" }, desc: { en: "Understanding learners' behavior and development.", ar: "فهم سلوك وتنمية المتعلمين." } },
+          { title: { en: "Mental Health", ar: "الصحة النفسية" }, desc: { en: "Promoting psychological wellbeing in educational settings.", ar: "تعزيز الرفاهية النفسية في البيئات التعليمية." } },
+          { title: { en: "Curriculum and Teaching Methods", ar: "المناهج وطرق التدريس" }, desc: { en: "Designing effective curricula and instructional strategies.", ar: "تصميم مناهج واستراتيجيات تدريسية فعالة." } },
+          { title: { en: "Environmental Education", ar: "التربية البيئية" }, desc: { en: "Teaching sustainability and environmental awareness.", ar: "تعليم الاستدامة والوعي البيئي." } }
+        ]
+      },
+      {
+        name: { en: "College of Media", ar: "كلية الإعلام" },
+        description: { en: "Shaping the future of media and communication.", ar: "تشكيل مستقبل الإعلام والاتصالات." },
+        image: "images/media.jpeg",
+        departments: [
+          { title: { en: "Media and Public Relations", ar: "الإعلام والعلاقات العامة" }, desc: { en: "Communicating effectively through media channels.", ar: "التواصل الفعال عبر قنوات الإعلام." } },
+          { title: { en: "Journalism", ar: "الصحافة" }, desc: { en: "Reporting news and information accurately.", ar: "الإبلاغ عن الأخبار والمعلومات بدقة." } },
+          { title: { en: "Radio and Television", ar: "الإذاعة والتلفاز" }, desc: { en: "Producing and broadcasting audio-visual content.", ar: "إنتاج والبث المحتوى السمعي البصري." } },
+          { title: { en: "Digital Media", ar: "الإعلام الرقمي" }, desc: { en: "Exploring online media platforms and technologies.", ar: "استكشاف منصات وتقنيات الإعلام الرقمي." } },
+          { title: { en: "Public Relations", ar: "العلاقات العامة" }, desc: { en: "Managing organizational communication and image.", ar: "إدارة الاتصالات التنظيمية والصورة." } }
+        ]
+      },
+      {
+        name: { en: "College of Computer and Information Technology", ar: "كلية الحاسوب وتقنية المعلومات" },
+        description: { en: "Shaping the future of technology and innovation.", ar: "تشكيل مستقبل التكنولوجيا والابتكار." },
+        image: "images/computer_it.jpeg",
+        departments: [
+          { title: { en: "Computer Science", ar: "علوم الحاسوب" }, desc: { en: "Fundamentals and applications of computing.", ar: "أساسيات وتطبيقات الحوسبة." } },
+          { title: { en: "Information Technology", ar: "تقنية المعلومات" }, desc: { en: "Managing and implementing IT systems.", ar: "إدارة وتنفيذ أنظمة تقنية المعلومات." } },
+          { title: { en: "Management Information Systems", ar: "أنظمة المعلومات الإدارية" }, desc: { en: "Using IT to support business processes.", ar: "استخدام تقنية المعلومات لدعم العمليات التجارية." } },
+          { title: { en: "Cybersecurity", ar: "الأمن السيبراني" }, desc: { en: "Protecting digital systems and data.", ar: "حماية الأنظمة الرقمية والبيانات." } },
+          { title: { en: "Artificial Intelligence", ar: "الذكاء الاصطناعي" }, desc: { en: "Designing intelligent systems and algorithms.", ar: "تصميم الأنظمة الذكية والخوارزميات." } }
+        ]
+      },
+      {
+        name: { en: "Centers", ar: "المراكز" },
+        description: { en: "Supporting academic excellence and community development.", ar: "دعم التميز الأكاديمي وتنمية المجتمع." },
+        image: "images/centers.png",
+        departments: [
+          { title: { en: "Measurement and Evaluation Center", ar: "مركز القياس والتقويم" }, desc: { en: "Ensuring excellence through precise assessment.", ar: "ضمان التميز من خلال التقييم الدقيق." } },
+          { title: { en: "Training and Community Service Center", ar: "مركز التدريب وخدمة المجتمع" }, desc: { en: "Empowering skills and serving society.", ar: "تعزيز المهارات وخدمة المجتمع." } },
+          { title: { en: "Al-Noor Center for Studies, Research, and Scientific Publishing", ar: "مركز النور للدراسات والبحوث والنشر العلمي" }, desc: { en: "Driving knowledge through research and inquiry.", ar: "تطوير المعرفة من خلال البحث والاستقصاء." } },
+          { title: { en: "Islamic Da'wah Center", ar: "مركز الدعوة الإسلامية" }, desc: { en: "Promoting Islamic values and outreach.", ar: "تعزيز القيم الإسلامية والتوعية." } }
+        ]
+      }
+    ];
+
+
+    function goToRegister(collegeIndex, departmentIndex) {
+      localStorage.setItem('selectedCollege', collegeIndex);
+      localStorage.setItem('selectedDepartment', departmentIndex);
+      window.location.href = 'register.html';
+    }
+
+    function selectCollege(index) {
+      currentCollegeIndex = index;
+      document.querySelectorAll('.college-item').forEach((el, i) => {
+        el.classList.toggle('active', i === index);
+      });
+
+      const c = colleges[index];
+      const currentLang = document.getElementById('htmlRoot').lang;
+      const t = translations[currentLang];
+
+      document.getElementById('college-name').textContent = c.name[currentLang] || c.name.en;
+      document.getElementById('college-description').textContent = c.description[currentLang] || c.description.en;
+
+      const img = document.getElementById('college-image');
+      img.src = "";
+      img.src = c.image;
+
+      const grid = document.getElementById('departments-grid');
+      grid.innerHTML = c.departments.map((d, deptIndex) => `
+  <a href="#" onclick="goToRegister(${index}, ${deptIndex}); return false;" class="p-4 border border-gray-200 rounded-lg hover:border-primary hover:bg-gray-50 transition-colors cursor-pointer block">
+    <h4 class="font-medium text-gray-800 text-sm mb-1">${d.title[currentLang] || d.title.en}</h4>
+    <p class="text-xs text-gray-500">${d.desc[currentLang] || d.desc.en}</p>
+  </a>
+`).join('');
+
+    }
+
+    /* ✅ FIX IMAGE DISAPPEAR ON BACK */
+    window.addEventListener("pageshow", function (event) {
+      if (event.persisted) {
+        const activeIndex = [...document.querySelectorAll(".college-item")]
+          .findIndex(el => el.classList.contains("active"));
+        if (activeIndex >= 0) selectCollege(activeIndex);
+      }
+    });
+
+    selectCollege(0);
+  </script>
+
+</body>
+
+</html>

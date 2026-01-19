@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="htmlRoot">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RIU Trust & Global Insights | Rabbanisan University</title>
+  <meta name="description"
+    content="Explore our official gallery of authentications and stay updated with the latest developments from Rabbanisan International University.">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@300;400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script
+    id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { primary: "#145e6d", "background-light": "#f6f8f8", "background-dark": "#121e20" }, fontFamily: { display: "Noto Serif" }, borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" } } } };</script>
+  <style>
+    body {
+      font-family: 'Lexend', sans-serif;
+    }
+
+    #success-modal:target {
+      display: flex;
+    }
+
+    html[dir="rtl"] body {
+      direction: rtl;
+      text-align: right;
+    }
+
+    html[dir="rtl"] * {
+      text-align: inherit;
+    }
+
+    html[dir="ltr"] body {
+      direction: ltr;
+      text-align: left;
+    }
+  </style>
+  <script>
+    const translations = {
+      en: {
+        nav_programs: "Programs",
+        nav_admissions: "Admissions",
+        nav_about: "About",
+        nav_research: "Research",
+        search_placeholder: "Search courses, faculty...",
+        btn_portal: "Student Portal",
+        hero_title_1: "RIU Trust &",
+        hero_title_2: "Global Insights",
+        hero_desc: "Explore our official gallery of authentications and stay updated with the latest developments from Rabbanisan International University.",
+        cert_title: "Certificates Authentication Gallery",
+        cert_link: "Official documents",
+        news_title: "University News",
+        news_desc: "Updates on accreditation, research, and campus life.",
+        load_more: "Load More News",
+        read_more: "Read more",
+        read_less: "Read less",
+        footer_brand_desc: "Bridging the gap between traditional Islamic knowledge and modern academic disciplines through a rigorous, US-licensed curriculum.",
+        footer_academics: "Academics",
+        footer_undergrad: "Undergraduate Programs",
+        footer_graduate: "Graduate Studies",
+        footer_phd: "PhD Research",
+        footer_islamic: "Islamic Studies",
+        footer_digital: "Digital Humanities",
+        footer_quick: "Quick Links",
+        footer_admissions: "Admissions Portal",
+        footer_calendar: "Academic Calendar",
+        footer_library: "Library & Resources",
+        footer_alumni: "Alumni Network",
+        footer_verify: "Verify Degree",
+        footer_contact: "Contact Us",
+        footer_copyright: "© 2025 Rabbaninen International University. All rights reserved.",
+        footer_privacy: "Privacy Policy",
+        footer_terms: "Terms of Use",
+        footer_accreditation: "Accreditation"
+      },
+      ar: {
+        nav_programs: "البرامج",
+        nav_admissions: "القبول",
+        nav_about: "عن الجامعة",
+        nav_research: "البحث العلمي",
+        search_placeholder: "ابحث عن المقررات والهيئة التدريسية...",
+        btn_portal: "بوابة الطالب",
+        hero_title_1: "ثقة RIU و",
+        hero_title_2: "رؤى عالمية",
+        hero_desc: "استكشف معرضنا الرسمي للتوثيقات وابق على اطلاع بآخر التطورات في جامعة ربانيين العالمية.",
+        cert_title: "معرض توثيق الشهادات",
+        cert_link: "وثائق رسمية",
+        news_title: "أخبار الجامعة",
+        news_desc: "تحديثات حول الاعتماد والبحث والحياة الجامعية.",
+        load_more: "تحميل المزيد من الأخبار",
+        read_more: "اقرأ المزيد",
+        read_less: "اقرأ أقل",
+        footer_brand_desc: "ربط الفجوة بين المعرفة الإسلامية التقليدية والتخصصات الأكاديمية الحديثة من خلال منهج صارم ومرخص من الولايات المتحدة.",
+        footer_academics: "الأكاديميات",
+        footer_undergrad: "برامج البكالوريوس",
+        footer_graduate: "الدراسات العليا",
+        footer_phd: "درجة الدكتوراه",
+        footer_islamic: "الدراسات الإسلامية",
+        footer_digital: "العلوم الإنسانية الرقمية",
+        footer_quick: "روابط سريعة",
+        footer_admissions: "بوابة القبول",
+        footer_calendar: "التقويم الأكاديمي",
+        footer_library: "المكتبة والموارد",
+        footer_alumni: "شبكة الخريجين",
+        footer_verify: "التحقق من الشهادة",
+        footer_contact: "اتصل بنا",
+        footer_copyright: "© 2025 جامعة ربانيين العالمية. جميع الحقوق محفوظة.",
+        footer_privacy: "سياسة الخصوصية",
+        footer_terms: "شروط الاستخدام",
+        footer_accreditation: "الاعتماد الأكاديمي"
+      }
+    };
+
+    function initLanguage() {
+      const saved = localStorage.getItem('language') || 'en';
+      setLanguage(saved);
+    }
+
+    function setLanguage(lang) {
+      const html = document.getElementById('htmlRoot');
+      const dir = lang === 'ar' ? 'rtl' : 'ltr';
+      html.lang = lang;
+      html.dir = dir;
+      localStorage.setItem('language', lang);
+      updateLanguageContent(lang);
+      updatePageText(lang);
+    }
+
+    function toggleLanguage() {
+      const html = document.getElementById('htmlRoot');
+      const currentLang = html.lang;
+      const newLang = currentLang === 'en' ? 'ar' : 'en';
+      setLanguage(newLang);
+    }
+
+    function updateLanguageContent(lang) {
+      const langText = document.getElementById('langText');
+      if (lang === 'ar') {
+        document.documentElement.classList.add('is-arabic');
+        langText.textContent = 'English';
+      } else {
+        document.documentElement.classList.remove('is-arabic');
+        langText.textContent = 'العربية';
+      }
+    }
+
+    function updatePageText(lang) {
+      const t = translations[lang];
+
+      // Map keys to IDs for elements with mismatched IDs (hyphens vs underscores)
+      const idMap = {
+        'nav_programs': 'nav-programs',
+        'nav_admissions': 'nav-admissions',
+        'nav_about': 'nav-about',
+        'nav_research': 'nav-research',
+        'search_placeholder': 'search-input',
+        'btn_portal': 'btn-portal'
+      };
+
+      for (const [key, text] of Object.entries(t)) {
+        // Try mapped ID first, then key as ID
+        const id = idMap[key] || key;
+        const element = document.getElementById(id);
+        if (element) {
+          if (element.tagName === 'INPUT') element.placeholder = text;
+          else element.textContent = text;
+        }
+      }
+
+      // Re-render dynamic content
+      if (typeof renderCertificates === 'function') renderCertificates();
+      if (typeof renderNews === 'function') renderNews();
+    }
+
+    document.addEventListener('DOMContentLoaded', initLanguage);
+  </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+  <!-- Header -->
+  <nav
+    class="sticky top-0 z-50 w-full border-b border-[#e8f0f2] bg-white/95 backdrop-blur-sm dark:bg-[#121e20]/95 dark:border-gray-700">
+    <div class="px-4 md:px-10 py-3 flex items-center justify-between max-w-[1440px] mx-auto">
+      <div class="flex items-center gap-4 md:gap-8">
+        <!-- Logo Area -->
+        <div class="flex items-center gap-3 text-primary dark:text-white">
+          <div class="size-10 flex items-center justify-center rounded-full bg-primary/10 text-primary">
+            <span class="material-symbols-outlined text-[28px]">school</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-lg font-bold leading-tight tracking-tight">RIU</span>
+            <span class="text-xs font-medium opacity-80">جامعة ربانيين العالمية</span>
+          </div>
+        </div>
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex items-center gap-8 pl-8">
+          <a class="text-sm font-medium hover:text-primary transition-colors" href="academic.html"><span
+              id="nav-programs">Programs</span></a>
+          <a class="text-sm font-medium hover:text-primary transition-colors" href="register.html"><span
+              id="nav-admissions">Admissions</span></a>
+          <a class="text-sm font-medium hover:text-primary transition-colors" href="aboutus.html"><span
+              id="nav-about">About</span></a>
+          <a class="text-sm font-medium hover:text-primary transition-colors" href="trust.html"><span
+              id="nav-research">Research</span></a>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <!-- Language Switch Button -->
+        <button
+          class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-[#0f181a] dark:text-white px-3 h-10 rounded-lg transition-colors text-sm font-medium"
+          id="langToggle" onclick="toggleLanguage()">
+          <span class="material-symbols-outlined text-[18px]">language</span>
+          <span id="langText">العربية</span>
+        </button>
+        <!-- Search -->
+        <div class="hidden md:flex items-center bg-[#e8f0f2] dark:bg-gray-800 rounded-lg px-3 h-10 w-64">
+          <span class="material-symbols-outlined text-[#538893] dark:text-gray-400 text-[20px]">search</span>
+          <input
+            class="bg-transparent border-none focus:ring-0 text-sm w-full ml-2 text-[#0f181a] dark:text-white placeholder:text-[#538893]"
+            id="search-input" placeholder="Search courses, faculty..." />
+        </div>
+        <!-- CTA -->
+        <button
+          class="bg-primary hover:bg-primary/90 text-white text-sm font-bold px-5 h-10 rounded-lg transition-colors flex items-center gap-2 shadow-sm">
+          <span class="material-symbols-outlined text-[18px]">account_circle</span>
+          <span class="hidden sm:inline" id="btn-portal">Student Portal</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-gradient border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div class="max-w-2xl">
+          <h1 id="hero_title_1" class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
+            RIU Trust &
+          </h1>
+          <h2 id="hero_title_2" class="text-3xl sm:text-4xl lg:text-5xl font-serif italic text-brand-700 mb-6">
+            Global Insights
+          </h2>
+          <p id="hero_desc" class="text-gray-600 leading-relaxed max-w-lg">
+            Explore our official gallery of authentications and stay updated with the latest developments from
+            Rabbanisan International University.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificates Authentication Gallery -->
+    <section class="py-12 sm:py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center mb-8">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-brand-100 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-brand-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+              </svg>
+            </div>
+            <h2 id="cert_title" class="text-xl sm:text-2xl font-bold text-gray-900">Certificates Authentication Gallery
+            </h2>
+          </div>
+          <a href="#" id="cert_link"
+            class="text-sm text-brand-700 hover:underline hidden sm:inline-flex items-center gap-1">
+            Official documents
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <div id="certificates-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Certificates rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- University News Section -->
+    <section class="py-12 sm:py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+          <h2 id="news_title" class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">University News</h2>
+          <p id="news_desc" class="text-gray-600">Updates on accreditation, research, and campus life.</p>
+        </div>
+
+        <div id="news-grid" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- News rendered by JS -->
+        </div>
+
+        <div class="text-center mt-10">
+          <button
+            class="px-6 py-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors inline-flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <span id="load_more">Load More News</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#121e20] text-white pt-20 pb-10 border-t border-gray-800">
+    <div class="container mx-auto px-4 md:px-10 max-w-[1440px]">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <!-- Col 1: Brand -->
+        <div>
+          <div class="flex items-center gap-3 mb-6 text-white">
+            <div class="size-10 flex items-center justify-center rounded-full bg-white/10 text-white">
+              <span class="material-symbols-outlined text-[24px]">school</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-lg font-bold leading-tight">RIU</span>
+              <span class="text-[10px] font-medium opacity-70">جامعة ربانيين العالمية</span>
+            </div>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6" id="footer-brand-desc">
+            Bridging the gap between traditional Islamic knowledge and modern academic disciplines
+            through a
+            rigorous, US-licensed curriculum.
+          </p>
+          <div class="flex gap-4">
+            <a class="text-gray-400 hover:text-white transition-colors"
+              href="https://www.facebook.com/profile.php?id=100095530594058"><span class="sr-only">Facebook</span>
+              <svg class="h-5 w-5" fill="currentColor" viewbox="0 0 24 24">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z">
+                </path>
+              </svg>
+            </a>
+            <a class="text-gray-400 hover:text-white transition-colors" href="https://t.me/AFBuniversity"><span
+                class="sr-only">Telegram</span>
+              <svg width="20px" height="20px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="#9ca3af"
+                class="bi bi-telegram">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z">
+                  </path>
+                </g>
+              </svg>
+
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 2: Academics -->
+        <div>
+          <h4 class="text-white font-bold mb-6 font-display" id="footer_academics">Academics</h4>
+          <ul class="space-y-4 text-sm text-gray-400">
+            <li><a class="hover:text-primary transition-colors" href="academic.html" id="footer_undergrad">Undergraduate
+                Programs</a></li>
+            <li><a class="hover:text-primary transition-colors" href="academic.html" id="footer_graduate">Graduate
+                Studies</a></li>
+            <li><a class="hover:text-primary transition-colors" href="academic.html" id="footer_phd">PhD
+                Research</a>
+            </li>
+            <li><a class="hover:text-primary transition-colors" href="academic.html" id="footer_islamic">Islamic
+                Studies</a></li>
+            <li><a class="hover:text-primary transition-colors" href="academic.html" id="footer_digital">Digital
+                Humanities</a></li>
+          </ul>
+        </div>
+        <!-- Col 3: Quick Links -->
+        <div>
+          <h4 class="text-white font-bold mb-6 font-display" id="footer_quick">Quick Links</h4>
+          <ul class="space-y-4 text-sm text-gray-400">
+            <li><a class="hover:text-primary transition-colors" href="register.html" id="footer_admissions">Admissions
+                Portal</a></li>
+            <li><a class="hover:text-primary transition-colors" href="#" id="footer_calendar">Academic
+                Calendar</a></li>
+            <li><a class="hover:text-primary transition-colors" href="#" id="footer_library">Library
+                &amp;
+                Resources</a></li>
+            <li><a class="hover:text-primary transition-colors" href="#" id="footer_alumni">Alumni
+                Network</a></li>
+            <li><a class="hover:text-primary transition-colors" href="trust.html" id="footer_verify">Verify
+                Degree</a></li>
+          </ul>
+        </div>
+        <!-- Col 4: Contact -->
+        <div>
+          <h4 class="text-white font-bold mb-6 font-display" id="footer_contact">Contact Us</h4>
+          <ul class="space-y-4 text-sm text-gray-400">
+            <li class="flex items-start gap-3">
+              <!-- <span class="material-symbols-outlined text-primary text-[20px]">location_on</span>
+<span>123 Academic Avenue, Knowledge District, USA</span>
+</li> -->
+            <li class="flex items-center gap-3">
+              <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <title>whatsapp [#128]</title>
+                  <desc>Created with Sketch.</desc>
+                  <defs> </defs>
+                  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Dribbble-Light-Preview" transform="translate(-300.000000, -7599.000000)" fill="#135d6c">
+                      <g id="icons" transform="translate(56.000000, 160.000000)">
+                        <path
+                          d="M259.821,7453.12124 C259.58,7453.80344 258.622,7454.36761 257.858,7454.53266 C257.335,7454.64369 256.653,7454.73172 254.355,7453.77943 C251.774,7452.71011 248.19,7448.90097 248.19,7446.36621 C248.19,7445.07582 248.934,7443.57337 250.235,7443.57337 C250.861,7443.57337 250.999,7443.58538 251.205,7444.07952 C251.446,7444.6617 252.034,7446.09613 252.104,7446.24317 C252.393,7446.84635 251.81,7447.19946 251.387,7447.72462 C251.252,7447.88266 251.099,7448.05372 251.27,7448.3478 C251.44,7448.63589 252.028,7449.59418 252.892,7450.36341 C254.008,7451.35771 254.913,7451.6748 255.237,7451.80984 C255.478,7451.90987 255.766,7451.88687 255.942,7451.69881 C256.165,7451.45774 256.442,7451.05762 256.724,7450.6635 C256.923,7450.38141 257.176,7450.3464 257.441,7450.44643 C257.62,7450.50845 259.895,7451.56477 259.991,7451.73382 C260.062,7451.85686 260.062,7452.43903 259.821,7453.12124 M254.002,7439 L253.997,7439 L253.997,7439 C248.484,7439 244,7443.48535 244,7449 C244,7451.18666 244.705,7453.21526 245.904,7454.86076 L244.658,7458.57687 L248.501,7457.3485 C250.082,7458.39482 251.969,7459 254.002,7459 C259.515,7459 264,7454.51465 264,7449 C264,7443.48535 259.515,7439 254.002,7439"
+                          id="whatsapp-[#128]"> </path>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+              <span>+18137789708 </span>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <title>whatsapp [#128]</title>
+                  <desc>Created with Sketch.</desc>
+                  <defs> </defs>
+                  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Dribbble-Light-Preview" transform="translate(-300.000000, -7599.000000)" fill="#135d6c">
+                      <g id="icons" transform="translate(56.000000, 160.000000)">
+                        <path
+                          d="M259.821,7453.12124 C259.58,7453.80344 258.622,7454.36761 257.858,7454.53266 C257.335,7454.64369 256.653,7454.73172 254.355,7453.77943 C251.774,7452.71011 248.19,7448.90097 248.19,7446.36621 C248.19,7445.07582 248.934,7443.57337 250.235,7443.57337 C250.861,7443.57337 250.999,7443.58538 251.205,7444.07952 C251.446,7444.6617 252.034,7446.09613 252.104,7446.24317 C252.393,7446.84635 251.81,7447.19946 251.387,7447.72462 C251.252,7447.88266 251.099,7448.05372 251.27,7448.3478 C251.44,7448.63589 252.028,7449.59418 252.892,7450.36341 C254.008,7451.35771 254.913,7451.6748 255.237,7451.80984 C255.478,7451.90987 255.766,7451.88687 255.942,7451.69881 C256.165,7451.45774 256.442,7451.05762 256.724,7450.6635 C256.923,7450.38141 257.176,7450.3464 257.441,7450.44643 C257.62,7450.50845 259.895,7451.56477 259.991,7451.73382 C260.062,7451.85686 260.062,7452.43903 259.821,7453.12124 M254.002,7439 L253.997,7439 L253.997,7439 C248.484,7439 244,7443.48535 244,7449 C244,7451.18666 244.705,7453.21526 245.904,7454.86076 L244.658,7458.57687 L248.501,7457.3485 C250.082,7458.39482 251.969,7459 254.002,7459 C259.515,7459 264,7454.51465 264,7449 C264,7443.48535 259.515,7439 254.002,7439"
+                          id="whatsapp-[#128]"> </path>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+              <span>+967712236727 </span>
+            </li>
+            <!-- <li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">mail</span>
+<span>admissions@riu.edu.int</span>
+</li> -->
+          </ul>
+        </div>
+      </div>
+      <div
+        class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+        <p id="footer_copyright">© 2025 Rabbaninen International University. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a class="hover:text-white" href="#" id="footer_privacy">Privacy Policy</a>
+          <a class="hover:text-white" href="#" id="footer_terms">Terms of Use</a>
+          <a class="hover:text-white" href="trust.html" id="footer_accreditation">Accreditation</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // API Configuration
+    const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbyzZXp6TsObz6cm8MSSqrSp3vN1KOzi42XlS67wFaMuiwadCJzWOxyaSSkXQDSTUxyU/exec';
+
+    // Certificates data
+    const certificatesData = [
+      {
+        id: 1,
+        title: { en: "US Notary Public Seal", ar: "ختم كاتب العدل الأمريكي" },
+        description: {
+          en: "Official notarization from United States signifying document authenticity and legal compliance standards.",
+          ar: "توثيق رسمي من الولايات المتحدة يدل على صحة المستند ومعايير الامتثال القانوني."
+        },
+        image: "images/trust1.jpeg",
+        verified: true
+      },
+      {
+        id: 2,
+        title: { en: "Department of State Apostille", ar: "أبوستيل وزارة الخارجية" },
+        description: {
+          en: "Federal authentication for international legal recognition across member nations.",
+          ar: "توثيق فيدرالي للاعتراف القانوني الدولي عبر الدول الأعضاء."
+        },
+        image: "images/trust2.jpeg",
+        verified: true
+      },
+      {
+        id: 3,
+        title: { en: "Embassy Attestation", ar: "تصديق السفارة" },
+        description: {
+          en: "Diplomatic verification certifying documents as valid and meeting embassy standards.",
+          ar: "تحقق دبلوماسي يشهد بأن المستندات صالحة وتفي بمعايير السفارة."
+        },
+        image: "images/trust3.jpeg",
+        verified: true
+      }
+    ];
+
+    // News data
+    let newsData = [];
+
+    // Fetch news from API
+    async function fetchNews() {
+      const grid = document.getElementById('news-grid');
+      grid.innerHTML = '<div class="col-span-full text-center py-12"><div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-brand-500 border-t-transparent"></div><p class="mt-2 text-gray-500">Loading news...</p></div>';
+
+      try {
+        const response = await fetch(`${GAS_API_URL}?list=true`);
+        const text = await response.text();
+        const data = text ? JSON.parse(text) : [];
+
+        newsData = data.map((news, index) => ({
+          id: news.timestamp || index,
+          type: news.type || 'regular',
+          category: news.category || 'General',
+          date: formatDate(news.date),
+          title: news.title,
+          excerpt: news.excerpt,
+          image: news.image || 'images/news-placeholder.jpg',
+          link: news.link || '#'
+        }));
+
+        // Sort by date (newest first) assuming timestamp is reliable
+        newsData.sort((a, b) => b.id - a.id);
+
+        renderNews();
+      } catch (error) {
+        console.error('Error fetching news:', error);
+        // Fallback data if API fails
+        newsData = [
+          {
+            id: 1,
+            type: "featured",
+            category: "ACADEMIC",
+            date: "Feb 15, 2026",
+            title: "Libyan Cultural Council Accredits Rabbanian International University",
+            excerpt: "Accreditation of Rabbanian International University by the Libyan Cultural Council. In a new step that enhances the credibility of digital academic certificates...",
+            image: "images/news1.jpg",
+            link: "#"
+          },
+          {
+            id: 2,
+            type: "regular",
+            category: "ACADEMIC",
+            date: "Jul 28, 2024",
+            title: "PhD with Distinction Awarded to Abdulmohsen Bafi",
+            excerpt: "Researcher Abdulmohsen Tanko Shamoun Bafi was awarded a PhD with distinction from the College of Computer Science...",
+            image: "images/news2.jpg",
+            link: "#"
+          },
+          {
+            id: 3,
+            type: "regular",
+            category: "PARTNERSHIP",
+            date: "Dec 22, 2025",
+            title: "Rabbanian University Honors President of Al-Amanah University",
+            excerpt: "Rabbanian International University – Asian–African Branch honored Dr. Baker Jettey, President of Al-Amanah University...",
+            image: "images/news3.jpg",
+            link: "#"
+          },
+          {
+            id: 4,
+            type: "regular",
+            category: "ACADEMIC",
+            date: "Nov 21, 2025",
+            title: "Kenyan Researcher Awarded PhD with Distinction",
+            excerpt: "Rabbanian International University – USA, through its Asian–African Branch, hosted a distinguished doctoral defense...",
+            image: "images/news4.jpg",
+            link: "#"
+          },
+          {
+            id: 5,
+            type: "regular",
+            category: "ACADEMIC",
+            date: "Dec 21, 2025",
+            title: "PhD in Law Awarded to Al-Amin Omar Danso",
+            excerpt: "Researcher Al-Amin Omar Danso was awarded a PhD in Law with a Very Good grade from the College of Sharia and Law...",
+            image: "images/news5.jpg",
+            link: "#"
+          }
+        ];
+        renderNews();
+      }
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    // Render certificates
+    function renderCertificates() {
+      const lang = localStorage.getItem('language') || 'en';
+      const grid = document.getElementById('certificates-grid');
+      grid.innerHTML = certificatesData.map(cert => `
+        <div class="certificate-card bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+          <div class="relative aspect-[4/3] bg-gray-100 overflow-hidden">
+            <img src="${cert.image}" alt="${cert.title}" class="w-full h-full object-cover" loading="lazy">
+            ${cert.verified ? `
+              <div class="absolute top-3 right-3 w-8 h-8 bg-brand-600 rounded-full flex items-center justify-center shadow-lg">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+            ` : ''}
+          </div>
+          <div class="p-5">
+            <h3 class="font-semibold text-gray-900 mb-2">${cert.title[lang]}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">${cert.description[lang]}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render news
+
+    function renderNews() {
+      const grid = document.getElementById('news-grid');
+      const lang = localStorage.getItem('language') || 'en';
+      const readMoreText = translations[lang].read_more;
+
+      if (!newsData || newsData.length === 0) {
+        grid.innerHTML = '<div class="col-span-full text-center py-10 text-gray-500">No news articles available at the moment.</div>';
+        return;
+      }
+
+      const featured = newsData[0];
+      const rest = newsData.slice(1);
+      const topRight = rest.slice(0, 2);
+      const bottomRight = rest.slice(2);
+
+      grid.innerHTML = `
+    <!-- Featured Article -->
+    <div class="lg:col-span-5">
+      <div class="news-card bg-white rounded-xl shadow-sm overflow-hidden h-full">
+        <div class="aspect-video lg:aspect-auto lg:h-48 overflow-hidden">
+          <img src="${featured.image}" alt="${featured.title}"
+            class="w-full h-full object-cover" loading="lazy">
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="px-3 py-1 text-xs font-medium bg-brand-100 text-brand-700 rounded-full">
+              ${featured.category}
+            </span>
+            <span class="text-sm text-gray-500">${featured.date}</span>
+          </div>
+
+          <h3 class="text-xl font-bold text-gray-900 mb-3">${featured.title}</h3>
+
+          <p id="excerpt-${featured.id}"
+             class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
+            ${featured.excerpt}
+          </p>
+
+          <button
+            onclick="toggleReadMore(${featured.id})"
+            class="text-brand-700 text-sm font-medium hover:underline inline-flex items-center gap-1">
+            ${readMoreText}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="lg:col-span-7 grid gap-6">
+
+      <!-- Top Row -->
+      <div class="grid sm:grid-cols-2 gap-6">
+        ${topRight.map(item => `
+          <div class="news-card bg-white rounded-xl shadow-sm overflow-hidden">
+            <div class="aspect-video overflow-hidden">
+              <img src="${item.image}" alt="${item.title}"
+                class="w-full h-full object-cover" loading="lazy">
+            </div>
+
+            <div class="p-5">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="px-2 py-0.5 text-xs font-medium bg-gray-100 text-gray-600 rounded">
+                  ${item.category}
+                </span>
+                <span class="text-xs text-gray-500">${item.date}</span>
+              </div>
+
+              <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2">
+                ${item.title}
+              </h3>
+
+              <p id="excerpt-${item.id}"
+                 class="text-sm text-gray-600 line-clamp-2">
+                ${item.excerpt}
+              </p>
+
+              <button
+                onclick="toggleReadMore(${item.id})"
+                class="mt-2 text-brand-700 text-sm font-medium hover:underline">
+                ${readMoreText}
+              </button>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      <!-- Bottom Row -->
+      <div class="grid sm:grid-cols-2 gap-6">
+        ${bottomRight.map(item => `
+          <div class="news-card bg-white rounded-xl shadow-sm overflow-hidden">
+            <div class="aspect-video overflow-hidden">
+              <img src="${item.image}" alt="${item.title}"
+                class="w-full h-full object-cover" loading="lazy">
+            </div>
+
+            <div class="p-5">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="px-2 py-0.5 text-xs font-medium bg-gray-100 text-gray-600 rounded">
+                  ${item.category}
+                </span>
+                <span class="text-xs text-gray-500">${item.date}</span>
+              </div>
+
+              <h3 class="font-semibold text-gray-900 mb-2">
+                ${item.title}
+              </h3>
+
+              <p id="excerpt-${item.id}"
+                 class="text-sm text-gray-600 line-clamp-2">
+                ${item.excerpt}
+              </p>
+
+              <button
+                onclick="toggleReadMore(${item.id})"
+                class="mt-2 text-brand-700 text-sm font-medium hover:underline">
+                ${readMoreText}
+              </button>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+    </div>
+  `;
+    }
+
+
+
+    function toggleReadMore(id) {
+      const text = document.getElementById(`excerpt-${id}`);
+      const lang = localStorage.getItem('language') || 'en';
+      const t = translations[lang];
+      const btn = text.nextElementSibling;
+
+      if (text.classList.contains('line-clamp-2')) {
+        text.classList.remove('line-clamp-2');
+        btn.textContent = t.read_less;
+      } else {
+        text.classList.add('line-clamp-2');
+        btn.textContent = t.read_more;
+      }
+    }
+
+
+
+
+    // Initial render
+    renderCertificates(); // Called by initLanguage -> updatePageText
+    fetchNews(); // Fetch once, renderNews is called inside fetchNews
+  </script>
+</body>
+
+</html>
