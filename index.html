@@ -77,7 +77,7 @@
                 programs: "Programs",
                 admissions: "Admissions",
                 about: "About",
-                research: "Research",
+                research: "News",
                 search_placeholder: "Search courses, faculty...",
                 student_portal: "Student Portal",
                 bridging: "Bridging Tradition & Modernity",
@@ -148,7 +148,7 @@
                 programs: "البرامج",
                 admissions: "القبول",
                 about: "عن الجامعة",
-                research: "البحث العلمي",
+                research: "الأخبار",
                 search_placeholder: "ابحث عن المقررات والهيئة التدريسية...",
                 student_portal: "بوابة الطالب",
                 bridging: "الجمع بين التراث والحداثة",
@@ -257,6 +257,10 @@
                 'nav-admissions': t.admissions,
                 'nav-about': t.about,
                 'nav-research': t.research,
+                'mobile-nav-programs': t.programs,
+                'mobile-nav-admissions': t.admissions,
+                'mobile-nav-about': t.about,
+                'mobile-nav-research': t.research,
                 'search-input': t.search_placeholder,
                 'btn-portal': t.student_portal,
                 'hero-tag': t.bridging,
@@ -334,6 +338,16 @@
         }
 
         document.addEventListener('DOMContentLoaded', initLanguage);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        });
     </script>
 </head>
 
@@ -363,7 +377,7 @@
                     <a class="text-sm font-medium hover:text-primary transition-colors" href="aboutus.html"><span
                             id="nav-about">About</span></a>
                     <a class="text-sm font-medium hover:text-primary transition-colors" href="trust.html"><span
-                            id="nav-research">Research</span></a>
+                            id="nav-research">News</span></a>
                 </div>
             </div>
             <div class="flex items-center gap-4">
@@ -382,11 +396,24 @@
                         id="search-input" placeholder="Search courses, faculty..." />
                 </div>
                 <!-- CTA -->
-                <button
+                <a href="dashboard.html"
                     class="bg-primary hover:bg-primary/90 text-white text-sm font-bold px-5 h-10 rounded-lg transition-colors flex items-center gap-2 shadow-sm">
                     <span class="material-symbols-outlined text-[18px]">account_circle</span>
                     <span class="hidden sm:inline" id="btn-portal">Student Portal</span>
+                </a>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="lg:hidden p-2 text-[#0f181a] dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                    <span class="material-symbols-outlined">menu</span>
                 </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-white dark:bg-[#121e20] border-t border-gray-100 dark:border-gray-800 shadow-lg z-40">
+            <div class="flex flex-col p-4 space-y-4">
+                <a class="text-sm font-medium text-[#0f181a] dark:text-white hover:text-primary transition-colors" href="academic.html"><span id="mobile-nav-programs">Programs</span></a>
+                <a class="text-sm font-medium text-[#0f181a] dark:text-white hover:text-primary transition-colors" href="register.html"><span id="mobile-nav-admissions">Admissions</span></a>
+                <a class="text-sm font-medium text-[#0f181a] dark:text-white hover:text-primary transition-colors" href="aboutus.html"><span id="mobile-nav-about">About</span></a>
+                <a class="text-sm font-medium text-[#0f181a] dark:text-white hover:text-primary transition-colors" href="trust.html"><span id="mobile-nav-research">News</span></a>
             </div>
         </div>
     </nav>
@@ -703,6 +730,12 @@
                                 </g>
                             </svg>
 
+                        </a>
+                        <a class="text-gray-400 hover:text-white transition-colors" href="https://www.youtube.com/@RIU_University"><span class="sr-only">YouTube</span>
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                            </svg>
                         </a>
                     </div>
                 </div>
